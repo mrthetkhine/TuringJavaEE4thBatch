@@ -9,7 +9,7 @@ import com.turing.javaee.dto.Message;
 import com.turing.javaee.service.MessageService;
 
 @RestController
-@RequestMapping("/")
+@RequestMapping("/home")
 public class HomeController {
 
 	@Autowired
@@ -21,4 +21,5 @@ public class HomeController {
 		System.out.println("Home controller");
 		return service.getMessage();
 	}
+	
 }
