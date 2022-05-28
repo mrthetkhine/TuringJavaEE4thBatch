@@ -1,7 +1,10 @@
 package com.turing.javaee.controller;
 
+import javax.validation.Valid;
+
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -25,10 +28,14 @@ public class BookController {
 		return "books";
 	}
 	@PostMapping
-	public String booksPost(@ModelAttribute Book book,Model model)
+	public String booksPost(@Valid @ModelAttribute Book book,BindingResult bindingResult,Model model)
 	{
 		log.info("books post controller");
 		log.info("Book title "+book.getTitle() + " Year "+book.getYear()+" Author "+book.getAuthor());
+		if(bindingResult.hasErrors())
+		{
+			log.info("books post controller have error "+ bindingResult.getErrorCount());
+		}
 		model.addAttribute("book", book);
 		return "books";
 	}
