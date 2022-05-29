@@ -1,15 +1,9 @@
-<!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
-<head>
-<meta charset="UTF-8">
-<title>Books</title>
-<script src="/webjars/bootstrap/5.1.3/js/bootstrap.min.js"></script>
-<link rel="stylesheet" href="/webjars/bootstrap/5.1.3/css/bootstrap.min.css" />
-</head>
-<body>
+ <html xmlns:th="http://www.thymeleaf.org">
+
+ <header th:insert="fragments/header.html :: header"> </header>
 	<span>Book View</span>
 	<div  class="mb-4 p-3">
-		<form action="#" method="POST" th:object="${book}">
+		<form action="/books" method="POST" th:object="${book}">
 		<span th:text="${book.title}"></span>
 		<p th:remove="tag" th:utext="${book.title}"/>
 		
@@ -17,6 +11,18 @@
 		 	<label for="title" class="col-sm-2 col-form-label">Title: </label>
 			<div class="col-sm-8">
 				<input id="title" type="text" th:field="*{title}" class="form-control"/>
+				<span class="alert alert-danger" th:if="${#fields.hasErrors('title')}" th:errors="*{title}">Title Error</span>
+			</div>
+			
+		
+		</div>
+		<div class="mb-3 row">
+		 	<label for="title" class="col-sm-2 col-form-label">Category: </label>
+			<div class="col-sm-8">
+				<select id="category" th:field="*{category}" class="form-control">
+					<option th:each="category: ${categories}" th:value="${category.id}" th:text="${category.name}">
+					</option>
+				</select>
 				<span class="alert alert-danger" th:if="${#fields.hasErrors('title')}" th:errors="*{title}">Title Error</span>
 			</div>
 			
