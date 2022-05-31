@@ -1,0 +1,31 @@
+ <html xmlns:th="http://www.thymeleaf.org">
+
+ <header th:insert="fragments/header.html :: header"> </header>
+	Collection Demo
+	<table class="table table-stripped">
+		<thead>
+			<tr>
+				<th>ID</th>
+				<th>Name</th>
+				<th>Remark</th>
+			</tr>
+		</thead>
+		<tbody>
+	    <tr th:each="category: ${categories}">
+	        <td th:text="${category.id}" />
+	        <td th:text="${category.name}" />
+	        <td>
+	         <span th:if="${category.id} == 1" th:text="Special " />
+	         <span th:unless="${category.id} == 1" th:text="Others " />
+	         
+	         <div th:switch="${category.id}" >
+			    <span th:case="1" th:text="'Id 1'" /> 
+			    <span th:case="2" th:text="'Id two'" />
+			</div> 
+	        </td>
+	    </tr>
+		</tbody>
+	</table>
+	
+</body>
+</html>

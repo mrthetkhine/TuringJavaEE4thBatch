@@ -5,6 +5,9 @@ import javax.validation.constraints.Min;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
+import javax.validation.constraints.Pattern;
+
+
 
 import com.turing.javaee.validation.BookYearValidation;
 
@@ -22,9 +25,10 @@ public class Book {
 	@NotNull(message="Category should not be empty")
 	Long category;
 	
-	
+	@NotNull(message="Year should not be empty")
 	@Min(value=1800)
-	Integer year;
+	@Pattern(regexp="^[0-9]+$",message="Year should be number")
+	String year;
 	
 	@NotEmpty(message="Author should not be empty")
 	String author;
