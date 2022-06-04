@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.turing.javaee.model.Book;
 import com.turing.javaee.model.Category;
+import com.turing.javaee.service.BookService;
 import com.turing.javaee.service.CategoryService;
 
 import lombok.extern.slf4j.Slf4j;
@@ -27,6 +28,19 @@ public class BookController {
 	
 	@Autowired
 	CategoryService categoryService;
+	
+	@Autowired
+	BookService bookService;
+	
+	@GetMapping
+	public String getAllBook(Model model)
+	{
+		log.info("get allbooks controller");
+		List<Book> books = this.bookService.getAllBook();
+		model.addAttribute("books", books);
+		
+		return "all_books";
+	}
 	
 	@GetMapping("/new")
 	public String books(Model model)
@@ -52,7 +66,7 @@ public class BookController {
 		if(!bindingResult.hasErrors())
 		{
 			log.info("Save book "+ book);
-			//model.addAttribute("book", new Book());
+			this.bookService.saveNewBook(book);
 			return "redirect:/books/new";
 		}
 		else

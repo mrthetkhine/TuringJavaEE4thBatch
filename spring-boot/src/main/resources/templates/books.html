@@ -25,7 +25,7 @@
 					<option th:each="category: ${categories}" th:value="${category.id}" th:text="${category.name}">
 					</option>
 				</select>
-				<span class="alert alert-danger" th:if="${#fields.hasErrors('title')}" th:errors="*{title}">Title Error</span>
+				<span class="alert alert-danger" th:if="${#fields.hasErrors('category')}" th:errors="*{category}">Title Error</span>
 			</div>
 			
 		

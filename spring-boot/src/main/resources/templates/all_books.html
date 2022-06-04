@@ -1,0 +1,27 @@
+ <html xmlns:th="http://www.thymeleaf.org">
+
+ <header th:insert="fragments/header.html :: header"> </header>
+	Collection Demo
+	<table class="table table-stripped">
+		<thead>
+			<tr>
+				<th>ID</th>
+				<th>Name</th>
+				<th>Year</th>
+				<th>Author</th>
+				<th>Email</th>
+			</tr>
+		</thead>
+		<tbody>
+	    <tr th:each="book: ${books}">
+	        <td th:text="${book.id}" />
+	        <td th:text="${book.title}" />
+	        <td th:text="${book.year}" />
+	        <td th:text="${book.author}" />
+	        <td th:text="${book.email}" />
+	    </tr>
+		</tbody>
+	</table>
+	
+</body>
+</html>

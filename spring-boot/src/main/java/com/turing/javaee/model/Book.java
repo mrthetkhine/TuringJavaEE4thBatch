@@ -11,16 +11,21 @@ import javax.validation.constraints.Pattern;
 
 import com.turing.javaee.validation.BookYearValidation;
 
+import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
+@AllArgsConstructor
+@NoArgsConstructor
 @Data
 @BookYearValidation(message="Year must be equal or greater than 2000 for technology")
 public class Book {
 
-	@NotEmpty(message="Title should not be empty")
-    @Size(min=3,max=100,message="Title should be within 3 to 100 in length")
-	String title;
+	Long id;
 	
+	@NotEmpty(message="{book.title.notempty}")
+    @Size(min=3,max=100,message="{book.title.length}")
+	String title;
 
 	@NotNull(message="Category should not be empty")
 	Long category;
