@@ -1,7 +1,7 @@
  <html xmlns:th="http://www.thymeleaf.org">
 
  <header th:insert="fragments/header.html :: header"> </header>
-	Collection Demo
+	<a th:href="@{/books/new}" class="btn btn-primary">New</a>
 	<table class="table table-stripped">
 		<thead>
 			<tr>
@@ -10,6 +10,7 @@
 				<th>Year</th>
 				<th>Author</th>
 				<th>Email</th>
+				<th>Action</th>
 			</tr>
 		</thead>
 		<tbody>
@@ -19,6 +20,10 @@
 	        <td th:text="${book.year}" />
 	        <td th:text="${book.author}" />
 	        <td th:text="${book.email}" />
+	        <td >
+	        	<a th:href="@{/books/{id}(id = ${book.id})}" class="btn btn-primary">View</a> 
+	        	<a th:href="@{/books/delete/{id}(id = ${book.id})}" class="btn btn-primary">Delete</a> 
+	        </td>
 	    </tr>
 		</tbody>
 	</table>

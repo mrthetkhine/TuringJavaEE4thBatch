@@ -7,6 +7,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
@@ -92,10 +93,22 @@ public class BookDaoImpl implements BookDao{
         );
 		
 	}
+	@SuppressWarnings("deprecation")
 	@Override
-	public Book getById(Long id) {
-		// TODO Auto-generated method stub
-		return null;
+	public Optional<Book> getById(Long id) {
+		return jdbcTemplate.queryForObject(
+                "SELECT * FROM Book where id = ?",
+                new Object[]{id},
+                (rs, rowNum) ->
+                        Optional.of(new Book(
+                                rs.getLong("id"),
+                                rs.getString("title"),
+                                rs.getLong("category"),
+                                rs.getLong("year")+"",
+                                rs.getString("author"),
+                                rs.getString("email")
+                        ))
+        );
 	}
 
 	@Override
@@ -107,9 +120,19 @@ public class BookDaoImpl implements BookDao{
 	}
 
 	@Override
-	public void update(Book book) {
-		// TODO Auto-generated method stub
-		
+	public int update(Book book) {
+		return jdbcTemplate.update(
+                "UPDATE Book set title=?,category=?,year=?,author=?,email=? WHERE id=? ",
+                book.getTitle(), book.getCategory(),book.getYear(),book.getAuthor(), book.getEmail(),book.getId());
+
+
+	}
+	@Override
+	public int delete(Long id) {
+		return jdbcTemplate.update(
+                "DELETE FROM Book WHERE id=? ",
+                id);
+
 	}
 
 }

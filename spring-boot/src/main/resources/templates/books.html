@@ -12,6 +12,7 @@
 		 		<span data-th-text="#{book.title}"></span> 
 		 	</label>
 			<div class="col-sm-8">
+				<input id="id" type="hidden" th:field="*{id}" class="form-control"/>
 				<input id="title" type="text" th:field="*{title}" class="form-control"/>
 				<span class="alert alert-danger" th:if="${#fields.hasErrors('title')}" th:errors="*{title}">Title Error</span>
 			</div>
@@ -57,7 +58,13 @@
 		<div class="mb-3 row">
 			<label class="col-sm-2 col-form-label"> </label>
 			<div class="col-sm-8">   
-				<button type="submit" class="btn btn-primary">Add</button>
+				<button type="submit" class="btn btn-primary">
+						<!-- <span th:if="${ book.id == null}" th:text="Save" />
+	         			<span th:unless="${book.id == null}" th:text="Update " />
+						 -->
+					 	<span  th:text="${book.id}==null?'Save':'Update'" />
+				</button>
+				<a th:href="@{/books}" class="btn btn-primary">Back</a> 
 			</div>
 		</div>
 	</form>

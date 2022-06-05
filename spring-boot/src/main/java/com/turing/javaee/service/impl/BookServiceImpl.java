@@ -1,6 +1,7 @@
 package com.turing.javaee.service.impl;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -25,6 +26,23 @@ public class BookServiceImpl implements BookService{
 	public int saveNewBook(Book book) {
 		
 		return bookDao.insert(book);
+	}
+
+	@Override
+	public int updateBook(Book book) {
+		
+		return bookDao.update(book);
+	}
+
+	@Override
+	public Optional<Book> getBookById(Long bookId) {
+		
+		return bookDao.getById(bookId);
+	}
+
+	@Override
+	public int deleteBookById(Long bookId) {
+		return bookDao.delete(bookId);
 	}
 
 }

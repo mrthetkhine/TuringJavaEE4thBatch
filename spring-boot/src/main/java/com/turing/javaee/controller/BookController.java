@@ -1,6 +1,7 @@
 package com.turing.javaee.controller;
 
 import java.util.List;
+import java.util.Optional;
 
 import javax.validation.Valid;
 
@@ -11,6 +12,7 @@ import org.springframework.validation.BindingResult;
 import org.springframework.validation.ObjectError;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
@@ -41,7 +43,25 @@ public class BookController {
 		
 		return "all_books";
 	}
-	
+	@GetMapping("/{bookId}")
+	public String getBook(@PathVariable Long bookId,Model model)
+	{
+		log.info("get A Book controller");
+		Optional<Book> book = this.bookService.getBookById(bookId);
+		
+		if(book.isPresent())
+		{
+			model.addAttribute("book", book.get());
+		}
+		else
+		{
+			model.addAttribute("book", new Book());
+		}
+		List<Category> categories = categoryService.getAllCategory();
+		model.addAttribute("categories", categories);
+		
+		return "books";
+	}
 	@GetMapping("/new")
 	public String books(Model model)
 	{
@@ -66,22 +86,34 @@ public class BookController {
 		if(!bindingResult.hasErrors())
 		{
 			log.info("Save book "+ book);
-			this.bookService.saveNewBook(book);
-			return "redirect:/books/new";
+			if(book.getId() == null)
+			{
+				this.bookService.saveNewBook(book);
+				return "redirect:/books/new";
+			}
+			else
+			{
+				this.bookService.updateBook(book);
+				return "redirect:/books";
+			}
+		
 		}
 		else
 		{
 			log.info("Book have error "+ bindingResult.getErrorCount());
 			
-			for ( ObjectError error: bindingResult.getAllErrors())
-			{
-				log.info("Error ", error.toString());
-			}
 			List<Category> categories = categoryService.getAllCategory();
 			model.addAttribute("categories", categories);
 			model.addAttribute("book", book);
 		}
 		
 		return "books";
+	}
+	@GetMapping("/delete/{bookId}")
+	public String deleteBook(@PathVariable Long bookId,Model model)
+	{
+		log.info("Delete  Book controller");
+		this.bookService.deleteBookById(bookId);
+		return "redirect:/books";
 	}
 }
