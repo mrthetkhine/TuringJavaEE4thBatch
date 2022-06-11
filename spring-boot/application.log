@@ -1673,3 +1673,6 @@ java.sql.SQLSyntaxErrorException: You have an error in your SQL syntax; check th
 2022-06-05 20:06:10.616  INFO 5069 --- [http-nio-8080-exec-9] c.t.javaee.controller.BookController     : get A Book controller
 2022-06-05 20:06:13.794  WARN 5069 --- [http-nio-8080-exec-4] .w.s.m.s.DefaultHandlerExceptionResolver : Resolved [org.springframework.web.method.annotation.MethodArgumentTypeMismatchException: Failed to convert value of type 'java.lang.String' to required type 'java.lang.Long'; nested exception is java.lang.NumberFormatException: For input string: "1'"]
 2022-06-05 20:06:20.348  INFO 5069 --- [http-nio-8080-exec-5] c.t.javaee.controller.BookController     : get A Book controller
+2022-06-05 20:25:48.699  INFO 5069 --- [RMI TCP Connection(47)-127.0.0.1] inMXBeanRegistrar$SpringApplicationAdmin : Application shutdown requested.
+2022-06-05 20:25:50.716  INFO 5069 --- [RMI TCP Connection(47)-127.0.0.1] com.zaxxer.hikari.HikariDataSource       : HikariPool-2 - Shutdown initiated...
+2022-06-05 20:25:50.720  INFO 5069 --- [RMI TCP Connection(47)-127.0.0.1] com.zaxxer.hikari.HikariDataSource       : HikariPool-2 - Shutdown completed.

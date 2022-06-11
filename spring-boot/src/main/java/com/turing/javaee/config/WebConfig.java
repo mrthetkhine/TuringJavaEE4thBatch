@@ -21,10 +21,16 @@ import com.turing.javaee.controller.BookController;
 import com.turing.javaee.servletdemo.HelloWorldServlet;
 
 import lombok.extern.slf4j.Slf4j;
+import springfox.documentation.builders.PathSelectors;
+import springfox.documentation.builders.RequestHandlerSelectors;
+import springfox.documentation.spi.DocumentationType;
+import springfox.documentation.spring.web.plugins.Docket;
+import springfox.documentation.swagger2.annotations.EnableSwagger2;
 
 @Slf4j
 @Configuration
 @EnableAspectJAutoProxy
+//@EnableSwagger2
 public class WebConfig implements WebMvcConfigurer {
 		@Bean	
 	   public ServletRegistrationBean<HttpServlet> demoServlet() {
@@ -64,4 +70,15 @@ public class WebConfig implements WebMvcConfigurer {
 	      messageSource.setDefaultEncoding("UTF-8");
 	      return messageSource;
 	  }
+	  /*
+	  @Bean
+	    public Docket productApi() {
+	        return new Docket(DocumentationType.SWAGGER_2)
+	                .select()
+	                .apis(RequestHandlerSelectors.any())
+	                .paths(PathSelectors.regex("/api/.*"))
+	                .build();
+
+	    }
+	    */
 }
