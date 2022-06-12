@@ -1,4 +1,4 @@
-package com.turing.javaee.model;
+package com.turing.javaee.dto;
 
 import java.io.Serializable;
 import java.util.Date;
@@ -9,30 +9,23 @@ import lombok.Data;
 import lombok.ToString;
 
 @Data
-@ToString
-@Entity
-public class Movie implements Serializable {
+public class MovieDto implements Serializable {
 	/**
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
 	
-	@Id
-	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private Long id;
 	
-	@Column
+	@NotEmpty(message="Movie title should not be empty")
 	private String title;
-	
-	@Column
+
+	@NotEmpty(message="Movie genre should not be empty")
 	private String genre;
 	
-	@Column
 	private Integer year;
 	
-	@Column
-	private Date created_at;
+	private Date created_at = new Date();
 	
-	@Column
-	private Date updated_at;
+	private Date updated_at = new Date();
 }
