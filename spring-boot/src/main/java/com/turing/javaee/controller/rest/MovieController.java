@@ -55,16 +55,16 @@ public class MovieController {
 	                    description = "Return 404 if there is no resource", 
 	                    content = { @Content(examples = { @ExampleObject(value = "") }) }) }) 
 	@GetMapping
-	List<Movie> getAllMovie()
+	List<MovieDto> getAllMovie()
 	{
 		log.info("get all movie rest api");
 		return   this.movieService.getAllMovie();
 	}
 	@GetMapping("/{movieId}")
-	ResponseEntity<Movie> getMovie(@PathVariable Long movieId)
+	ResponseEntity<MovieDto> getMovie(@PathVariable Long movieId)
 	{
 		log.info("get a movie rest api");
-		Optional<Movie> movieResult = this.movieService.getMovieById(movieId);
+		Optional<MovieDto> movieResult = this.movieService.getMovieById(movieId);
 		if(movieResult.isPresent())
 		{
 			return ResponseEntity.ok(movieResult.get());
@@ -99,10 +99,10 @@ public class MovieController {
 	}
 	
 	@DeleteMapping("/{movieId}")
-	ResponseEntity<Movie> deleteMovie(@PathVariable Long movieId)
+	ResponseEntity<MovieDto> deleteMovie(@PathVariable Long movieId)
 	{
 		log.info("delete a movie rest api");
-		Optional<Movie> movieResult = this.movieService.getMovieById(movieId);
+		Optional<MovieDto> movieResult = this.movieService.getMovieById(movieId);
 		if(movieResult.isPresent())
 		{
 			this.movieService.deleteMovieById(movieId);

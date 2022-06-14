@@ -7,8 +7,8 @@ import com.turing.javaee.dto.MovieDto;
 import com.turing.javaee.model.Movie;
 
 public interface MovieService {
-	List<Movie> getAllMovie();
-	Optional<Movie> getMovieById(Long movieId);
+	List<MovieDto> getAllMovie();
+	Optional<MovieDto> getMovieById(Long movieId);
 	MovieDto saveMovie(MovieDto movie);
 	void deleteMovieById(Long movieId);
 }

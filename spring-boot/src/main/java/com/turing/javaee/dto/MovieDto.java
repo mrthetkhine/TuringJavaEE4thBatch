@@ -9,13 +9,13 @@ import lombok.Data;
 import lombok.ToString;
 
 @Data
-public class MovieDto implements Serializable {
+public class MovieDto extends BaseDto implements Serializable {
 	/**
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
 	
-	private Long id;
+	
 	
 	@NotEmpty(message="Movie title should not be empty")
 	private String title;
@@ -25,7 +25,5 @@ public class MovieDto implements Serializable {
 	
 	private Integer year;
 	
-	private Date created_at = new Date();
-	
-	private Date updated_at = new Date();
+	private MovieDetailDto movieDetail;
 }
