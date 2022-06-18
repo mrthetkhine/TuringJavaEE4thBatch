@@ -2,6 +2,8 @@ package com.turing.javaee.model;
 
 import java.io.Serializable;
 import java.util.Date;
+import java.util.List;
+
 import javax.persistence.*;
 import javax.validation.constraints.NotEmpty;
 
@@ -32,5 +34,20 @@ public class Movie extends BaseEntity implements Serializable {
 			cascade = CascadeType.ALL,
 			fetch= FetchType.LAZY)
 	MovieDetail movieDetail;
+	
+	@OneToMany(
+			cascade= CascadeType.ALL,
+			orphanRemoval = true
+			)
+	@JoinColumn(name="movie_id")
+	List<Comment> comments;
+	
+	@ManyToMany(
+			fetch=FetchType.LAZY,
+			cascade=CascadeType.ALL)
+	@JoinTable(name="actor_in_movie",
+			joinColumns = { @JoinColumn(name = "movie_id") },
+            inverseJoinColumns = { @JoinColumn(name = "actor_id") })
+	List<Actor> actors;
 	
 }
