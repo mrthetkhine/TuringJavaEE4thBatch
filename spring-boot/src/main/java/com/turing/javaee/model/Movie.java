@@ -7,11 +7,14 @@ import java.util.List;
 import javax.persistence.*;
 import javax.validation.constraints.NotEmpty;
 
+import com.turing.javaee.controller.rest.MovieController;
 import com.turing.javaee.model.BaseEntity;
 
 import lombok.Data;
 import lombok.ToString;
+import lombok.extern.slf4j.Slf4j;
 
+@Slf4j
 @Data
 @ToString
 @Entity
@@ -50,4 +53,20 @@ public class Movie extends BaseEntity implements Serializable {
             inverseJoinColumns = { @JoinColumn(name = "actor_id") })
 	List<Actor> actors;
 	
+	@PostLoad
+	private void postLoad()
+	{
+		log.info("PostLoad for movie entity "+this.getId());
+	}
+	
+	@PreUpdate
+    private void preUpdateFunction(){
+        log.info("PreUpdate method called");
+    }
+
+    @PostUpdate
+    private void postUpdateFunction(){
+        log.info("PostUpdate method called");
+    }
+    
 }

@@ -1,5 +1,6 @@
 package com.turing.javaee.service.impl;
 
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -7,9 +8,11 @@ import java.util.Optional;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.turing.javaee.controller.rest.MovieController;
 import com.turing.javaee.dao.MovieDao;
+import com.turing.javaee.dto.GenreCountDto;
 import com.turing.javaee.dto.MovieDto;
 import com.turing.javaee.model.Movie;
 import com.turing.javaee.model.MovieDetail;
@@ -29,7 +32,9 @@ public class MovieServiceImpl implements MovieService{
 	@Override
 	public List<MovieDto> getAllMovie() {
 		
-		Iterable<Movie> movies = movieDao.findAll();
+		//Iterable<Movie> movies = movieDao.findAll();
+		//Iterable<Movie> movies = movieDao.getAllMovie();
+		Iterable<Movie> movies = movieDao.getAllMovieViaNativeSQL();
 		return entitiesToDtoList(movies);
 	}
 	List<MovieDto> entitiesToDtoList(Iterable<Movie> movies)
@@ -56,6 +61,7 @@ public class MovieServiceImpl implements MovieService{
 		}
 	}
 
+	@Transactional(rollbackFor = { SQLException.class })
 	@Override
 	public MovieDto saveMovie(MovieDto movieDto) {
 		Movie movie = mapper.map(movieDto, Movie.class);
@@ -75,6 +81,13 @@ public class MovieServiceImpl implements MovieService{
 	@Override
 	public void deleteMovieById(Long movieId) {
 		movieDao.deleteById(movieId);
+	}
+	@Override
+	public List<GenreCountDto> getMovieGenreCount() {
+		List<GenreCountDto> genreCounts = this.movieDao.getMovieGenreCount();
+		
+		log.info("Genres Counts " + genreCounts.size());
+		return genreCounts;
 	}
 
 }

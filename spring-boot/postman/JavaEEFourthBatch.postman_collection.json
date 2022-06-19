@@ -15,7 +15,7 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "http://localhost:8080/api/movies/3",
+							"raw": "http://localhost:8080/api/movies/12",
 							"protocol": "http",
 							"host": [
 								"localhost"
@@ -24,7 +24,7 @@
 							"path": [
 								"api",
 								"movies",
-								"3"
+								"12"
 							]
 						}
 					},
@@ -225,7 +225,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n   \n    \"title\": \"Movie with DTO \",\n    \"genre\": \"Crime\",\n    \"year\": 2015\n \n}"
+							"raw": "{\n    \"created_at\": \"2022-06-14T14:43:41.000+00:00\",\n    \"updated_at\": \"2022-06-14T14:51:11.000+00:00\",\n    \"title\": \"Titanic 2\",\n    \"genre\": \"Darama\",\n    \"year\": 1900,\n    \"movieDetail\": {\n        \"created_at\": \"2022-06-14T14:43:41.000+00:00\",\n        \"updated_at\": \"2022-06-14T14:51:11.000+00:00\",\n        \"description\": \"Movie Test Update 4 Detail\"\n    },\n    \"actors\": [\n        {\n            \"firstName\": \"Kate2\",\n            \"lastName\": \"Winslet2\",\n    \n            \"gender\": \"FEMALE\",\n            \"address\": {\n                \"street\": \"Street1\",\n                \"township\": \"London\",\n                \"city\": \"London\"\n            }\n        },\n        {\n            \"firstName\": \"Leonardo2\",\n            \"lastName\": \"DiCaprio2\",\n            \"fullName\": \"Leonardo DiCaprio\",\n            \"gender\": \"MALE\",\n            \"address\": {\n                \"street\": \"Street2\",\n                \"township\": \"London\",\n                \"city\": \"London\"\n            }\n        }\n    ]\n}"
 						},
 						"url": {
 							"raw": "http://localhost:8080/api/movies",
@@ -255,10 +255,10 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n    \"id\": 3,\n    \"title\": \"Movie 3 Updated\",\n    \"genre\": \"Crime\",\n    \"year\": 2015\n \n}"
+							"raw": "{\n    \"id\": 15,\n    \"created_at\": \"2022-06-14T14:43:40.799+00:00\",\n    \"updated_at\": \"2022-06-14T14:43:40.799+00:00\",\n    \"title\": \"Movie Test Updated 4\",\n    \"genre\": \"Horror\",\n    \"year\": 1900,\n    \"movieDetail\": {\n        \"id\": 7,\n        \"created_at\": \"2022-06-14T14:43:40.841+00:00\",\n        \"updated_at\": \"2022-06-14T14:43:40.841+00:00\",\n        \"description\": \"Movie Test Update 4 Detail\"\n    }\n}"
 						},
 						"url": {
-							"raw": "http://localhost:8080/api/movies/3",
+							"raw": "http://localhost:8080/api/movies/15",
 							"protocol": "http",
 							"host": [
 								"localhost"
@@ -267,7 +267,7 @@
 							"path": [
 								"api",
 								"movies",
-								"3"
+								"15"
 							]
 						}
 					},
@@ -289,7 +289,7 @@
 							"raw": ""
 						},
 						"url": {
-							"raw": "http://localhost:8080/api/movies/4",
+							"raw": "http://localhost:8080/api/movies/14",
 							"protocol": "http",
 							"host": [
 								"localhost"
@@ -298,7 +298,164 @@
 							"path": [
 								"api",
 								"movies",
-								"4"
+								"14"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Actor",
+			"item": [
+				{
+					"name": "GetAllActor",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{api_ host}}actors",
+							"host": [
+								"{{api_ host}}actors"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "GetAllActor",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{api_ host}}actors",
+									"host": [
+										"{{api_ host}}actors"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Vary",
+									"value": "Origin"
+								},
+								{
+									"key": "Vary",
+									"value": "Access-Control-Request-Method"
+								},
+								{
+									"key": "Vary",
+									"value": "Access-Control-Request-Headers"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Transfer-Encoding",
+									"value": "chunked"
+								},
+								{
+									"key": "Date",
+									"value": "Sat, 18 Jun 2022 12:39:19 GMT"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=60"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								}
+							],
+							"cookie": [],
+							"body": "[\n    {\n        \"id\": 6,\n        \"created_at\": null,\n        \"updated_at\": null,\n        \"firstName\": \"Kate\",\n        \"lastName\": \"Winslet\",\n        \"fullName\": \"Kate Winslet\",\n        \"gender\": \"FEMALE\",\n        \"street\": \"Street1\",\n        \"township\": \"London\",\n        \"city\": \"London\"\n    }\n]"
+						}
+					]
+				},
+				{
+					"name": "GetActor",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{api_ host}}actors/6",
+							"host": [
+								"{{api_ host}}actors"
+							],
+							"path": [
+								"6"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "SaveActor",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "  {\n        \"firstName\": \"Carrie-Anne \",\n        \"lastName\": \"Moss\",\n        \"gender\": \"FEMALE\",\n        \"address\":{\n            \"street\": \"Street2\",\n            \"township\": \"London\",\n            \"city\": \"London\"\n        }\n       \n    }"
+						},
+						"url": {
+							"raw": "{{api_ host}}actors",
+							"host": [
+								"{{api_ host}}actors"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "UpdateActor",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "  {\n        \"firstName\": \"Carrie-Anne \",\n        \"lastName\": \"Moss\",\n        \"gender\": \"FEMALE\",\n        \"address\":{\n            \"street\": \"Carrie Annne Address\",\n            \"township\": \"London\",\n            \"city\": \"London\"\n        }\n       \n    }"
+						},
+						"url": {
+							"raw": "{{api_ host}}actors/8",
+							"host": [
+								"{{api_ host}}actors"
+							],
+							"path": [
+								"8"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "DeleteActor",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{api_ host}}actors/9",
+							"host": [
+								"{{api_ host}}actors"
+							],
+							"path": [
+								"9"
 							]
 						}
 					},

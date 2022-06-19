@@ -20,6 +20,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.turing.javaee.controller.BookController;
 import com.turing.javaee.dao.MovieDao;
+import com.turing.javaee.dto.GenreCountDto;
 import com.turing.javaee.dto.MovieDto;
 import com.turing.javaee.model.Movie;
 import com.turing.javaee.service.MovieService;
@@ -73,6 +74,13 @@ public class MovieController {
 		{
 			return  ResponseEntity.notFound().build();
 		}
+	}
+	@GetMapping("/genre-count")
+	ResponseEntity<Object> getGenreCount()
+	{
+		log.info("get getGenreCount");
+		List<GenreCountDto> genreCount = this.movieService.getMovieGenreCount();
+		return ResponseEntity.ok(genreCount);
 	}
 	@PostMapping
 	ResponseEntity<MovieDto> saveMovie(@RequestBody @Valid MovieDto movieDto)
