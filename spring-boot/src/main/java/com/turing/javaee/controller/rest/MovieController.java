@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.turing.javaee.controller.BookController;
@@ -61,6 +62,12 @@ public class MovieController {
 		log.info("get all movie rest api");
 		return   this.movieService.getAllMovie();
 	}
+	@GetMapping("/paging")
+	List<MovieDto> getAllMovieByPage(@RequestParam Integer pageNo, @RequestParam Integer size)
+	{
+		log.info("get all movie rest api");
+		return   this.movieService.findMovieByPage(pageNo,size);
+	}
 	@GetMapping("/{movieId}")
 	ResponseEntity<MovieDto> getMovie(@PathVariable Long movieId)
 	{
@@ -81,6 +88,62 @@ public class MovieController {
 		log.info("get getGenreCount");
 		List<GenreCountDto> genreCount = this.movieService.getMovieGenreCount();
 		return ResponseEntity.ok(genreCount);
+	}
+	@GetMapping("/searchActionOrHorrorMovie")
+	ResponseEntity<List<MovieDto>> searchActionOrHorrorMovie()
+	{
+		log.info("search searchActionOrHorrorMovie");
+		List<MovieDto> movies = this.movieService.findMovieByActionOrHorror();
+		return ResponseEntity.ok(movies);
+	}
+	@GetMapping("/searchByGenre")
+	ResponseEntity<List<MovieDto>> searchByGenre(@RequestParam String genre)
+	{
+		log.info("search By Genere");
+		List<MovieDto> movies = this.movieService.findByGenre(genre);
+		return ResponseEntity.ok(movies);
+	}
+	@GetMapping("/searchByTitle")
+	ResponseEntity<List<MovieDto>> searchTitle(@RequestParam String title)
+	{
+		log.info("search By searchTitle");
+		List<MovieDto> movies = this.movieService.findByTitle(title);
+		return ResponseEntity.ok(movies);
+	}
+	@GetMapping("/searchByTitleAndGenre")
+	ResponseEntity<List<MovieDto>> searchByTitleAndGenre(@RequestParam String title,@RequestParam String genre)
+	{
+		log.info("search By @RequestParam String genre");
+		List<MovieDto> movies = this.movieService.searchByTitleAndGenre(title, genre);
+		return ResponseEntity.ok(movies);
+	}
+	@GetMapping("/searchByTitleOrGenre")
+	ResponseEntity<List<MovieDto>> searchByTitleOrGenre(@RequestParam String title,@RequestParam String genre)
+	{
+		log.info("search By searchByTitleOrGenre");
+		List<MovieDto> movies = this.movieService.searchByTitleOrGenre(title, genre);
+		return ResponseEntity.ok(movies);
+	}
+	@GetMapping("/searchByYearAfter")
+	ResponseEntity<List<MovieDto>> searchByYearAfter(@RequestParam Integer year)
+	{
+		log.info("search By searchByYearAfter");
+		List<MovieDto> movies = this.movieService.searchByYearAfter(year);
+		return ResponseEntity.ok(movies);
+	}
+	@GetMapping("/orderByYear")
+	ResponseEntity<List<MovieDto>> orderByYear()
+	{
+		log.info("search By orderByYear");
+		List<MovieDto> movies = this.movieService.findMovieOrderByYear();
+		return ResponseEntity.ok(movies);
+	}
+	@GetMapping("/top5OrderByYear")
+	ResponseEntity<List<MovieDto>> top5OrderByYear()
+	{
+		log.info("search By top5OrderByYear");
+		List<MovieDto> movies = this.movieService.findTop5MovieOrderByYear();
+		return ResponseEntity.ok(movies);
 	}
 	@PostMapping
 	ResponseEntity<MovieDto> saveMovie(@RequestBody @Valid MovieDto movieDto)

@@ -7,6 +7,8 @@ import java.util.Optional;
 
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -35,6 +37,12 @@ public class MovieServiceImpl implements MovieService{
 		//Iterable<Movie> movies = movieDao.findAll();
 		//Iterable<Movie> movies = movieDao.getAllMovie();
 		Iterable<Movie> movies = movieDao.getAllMovieViaNativeSQL();
+		return entitiesToDtoList(movies);
+	}
+	@Override
+	public List<MovieDto> findMovieByPage(int pageNo, int size) {
+		
+		Page<Movie> movies = movieDao.findAll(PageRequest.of(pageNo, size));
 		return entitiesToDtoList(movies);
 	}
 	List<MovieDto> entitiesToDtoList(Iterable<Movie> movies)
@@ -89,5 +97,52 @@ public class MovieServiceImpl implements MovieService{
 		log.info("Genres Counts " + genreCounts.size());
 		return genreCounts;
 	}
-
+	@Override
+	public List<MovieDto> findMovieOrderByYear()
+	{
+		Iterable<Movie> movies = movieDao.findAllByOrderByYearDesc();
+		return entitiesToDtoList(movies);
+	}
+	@Override
+	public List<MovieDto> findTop5MovieOrderByYear() {
+		Iterable<Movie> movies = movieDao.findTop5ByOrderByYear();
+		return entitiesToDtoList(movies);
+	}
+	@Override
+	public List<MovieDto> findByGenre(String genre) {
+		Iterable<Movie> movies = movieDao.findByGenre(genre);
+		return entitiesToDtoList(movies);
+	}
+	@Override
+	public List<MovieDto> findByTitle(String title)
+	{
+		Iterable<Movie> movies = movieDao.getAllMovieByTitle(title);
+		return entitiesToDtoList(movies);
+	}
+	@Override
+	public List<MovieDto> searchByTitleAndGenre(String title,String genre)
+	{
+		Iterable<Movie> movies = movieDao.findByTitleAndGenre(title, genre);
+		return entitiesToDtoList(movies);
+	}
+	@Override
+	public List<MovieDto> searchByTitleOrGenre(String title,String genre)
+	{
+		Iterable<Movie> movies = movieDao.findByTitleOrGenre(title, genre);
+		return entitiesToDtoList(movies);
+	}
+	@Override
+	public List<MovieDto> findMovieByActionOrHorror()
+	{
+		Iterable<Movie> movies = movieDao.findMovieForActionOrHorror();
+		return entitiesToDtoList(movies);
+	}
+	@Override
+	public List<MovieDto> searchByYearAfter(Integer year)
+	{
+		Iterable<Movie> movies = movieDao.findByYearGreaterThan(year);
+		return entitiesToDtoList(movies);
+	}
+	
+	
 }

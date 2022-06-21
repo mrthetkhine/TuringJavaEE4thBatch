@@ -13,4 +13,16 @@ public interface MovieService {
 	MovieDto saveMovie(MovieDto movie);
 	void deleteMovieById(Long movieId);
 	List<GenreCountDto> getMovieGenreCount();
+	
+	List<MovieDto> findMovieByActionOrHorror();
+	List<MovieDto> findMovieByPage(int pageNo,int size);
+	List<MovieDto> findMovieOrderByYear();
+	List<MovieDto> findTop5MovieOrderByYear();
+	
+	List<MovieDto> findByGenre(String genre);
+	List<MovieDto> findByTitle(String title);
+	List<MovieDto> searchByTitleAndGenre(String title,String genre);
+	List<MovieDto> searchByTitleOrGenre(String title,String genre);
+	
+	List<MovieDto> searchByYearAfter(Integer year);
 }
