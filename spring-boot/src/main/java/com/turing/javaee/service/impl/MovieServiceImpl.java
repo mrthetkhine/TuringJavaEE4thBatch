@@ -14,6 +14,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.turing.javaee.controller.rest.MovieController;
 import com.turing.javaee.dao.MovieDao;
+import com.turing.javaee.dao.MovieSearchDao;
 import com.turing.javaee.dto.GenreCountDto;
 import com.turing.javaee.dto.MovieDto;
 import com.turing.javaee.model.Movie;
@@ -29,6 +30,9 @@ public class MovieServiceImpl implements MovieService{
 	MovieDao movieDao;
 	
 	@Autowired
+	MovieSearchDao movieSearchDao;
+	
+	@Autowired
 	ModelMapper mapper;
 	
 	@Override
@@ -36,7 +40,8 @@ public class MovieServiceImpl implements MovieService{
 		
 		//Iterable<Movie> movies = movieDao.findAll();
 		//Iterable<Movie> movies = movieDao.getAllMovie();
-		Iterable<Movie> movies = movieDao.getAllMovieViaNativeSQL();
+		//Iterable<Movie> movies = movieDao.getAllMovieViaNativeSQL();
+		Iterable<Movie> movies = movieSearchDao.findAllMovie();
 		return entitiesToDtoList(movies);
 	}
 	@Override
@@ -134,15 +139,27 @@ public class MovieServiceImpl implements MovieService{
 	@Override
 	public List<MovieDto> findMovieByActionOrHorror()
 	{
-		Iterable<Movie> movies = movieDao.findMovieForActionOrHorror();
+		//Iterable<Movie> movies = movieDao.findMovieForActionOrHorror();
+		Iterable<Movie> movies = movieSearchDao.findMovieByActionOrHorror();
 		return entitiesToDtoList(movies);
 	}
 	@Override
 	public List<MovieDto> searchByYearAfter(Integer year)
 	{
-		Iterable<Movie> movies = movieDao.findByYearGreaterThan(year);
+		//Iterable<Movie> movies = movieDao.findByYearGreaterThan(year);
+		Iterable<Movie> movies = movieSearchDao.findAllMovieByYearAfter(year);
 		return entitiesToDtoList(movies);
 	}
-	
-	
+	@Override
+	public List<MovieDto> searchMovieWithActor(String actorName)
+	{
+		Iterable<Movie> movies = movieDao.findMovieWhichContainActor(actorName);
+		return entitiesToDtoList(movies);
+	}
+	@Override
+	public List<MovieDto> searchMovieByTitleYear(String title,Integer year)
+	{
+		Iterable<Movie> movies = movieSearchDao.findMovieByTitleYear(title, year);
+		return entitiesToDtoList(movies);
+	}
 }

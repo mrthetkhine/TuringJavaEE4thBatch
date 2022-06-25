@@ -103,7 +103,7 @@ public class ActorController {
 	}
 	
 	@DeleteMapping("/{actorId}")
-	ResponseEntity<Actor> deleteMovie(@PathVariable Long actorId)
+	ResponseEntity<Actor> deleteActore(@PathVariable Long actorId)
 	{
 		log.info("delete a actor rest api");
 		Optional<Actor> actorResult = this.actorService.getActorById(actorId);
@@ -111,6 +111,22 @@ public class ActorController {
 		{
 			this.actorService.deleteActorById(actorId);
 			return ResponseEntity.ok(actorResult.get());
+		}
+		else
+		{
+			return  ResponseEntity.notFound().build();
+		}
+	}
+	@PutMapping("/{actorId}/{gender}")
+	ResponseEntity<Actor> updateGender(@PathVariable Long actorId,@PathVariable String gender)
+	{
+		log.info("Update Actor gender " );
+		
+		if( this.actorService.getActorById(actorId).isPresent())
+		{
+			
+			Optional<Actor> newActor = this.actorService.updateActorGender(actorId, gender);
+			return  ResponseEntity.ok(newActor.get());
 		}
 		else
 		{

@@ -124,11 +124,25 @@ public class MovieController {
 		List<MovieDto> movies = this.movieService.searchByTitleOrGenre(title, genre);
 		return ResponseEntity.ok(movies);
 	}
+	@GetMapping("/serchByTitleYear")
+	ResponseEntity<List<MovieDto>> serchByTitleYear(@RequestParam(required=false) String title,@RequestParam(required=false) Integer year)
+	{
+		log.info("search By serchByTitleYear");
+		List<MovieDto> movies = this.movieService.searchMovieByTitleYear(title, year);
+		return ResponseEntity.ok(movies);
+	}
 	@GetMapping("/searchByYearAfter")
 	ResponseEntity<List<MovieDto>> searchByYearAfter(@RequestParam Integer year)
 	{
 		log.info("search By searchByYearAfter");
 		List<MovieDto> movies = this.movieService.searchByYearAfter(year);
+		return ResponseEntity.ok(movies);
+	}
+	@GetMapping("/searchByActor")
+	ResponseEntity<List<MovieDto>> searchByActor(@RequestParam String actorName)
+	{
+		log.info("search By searchByYearAfter");
+		List<MovieDto> movies = this.movieService.searchMovieWithActor(actorName);
 		return ResponseEntity.ok(movies);
 	}
 	@GetMapping("/orderByYear")

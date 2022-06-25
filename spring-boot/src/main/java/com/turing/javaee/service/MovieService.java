@@ -25,4 +25,6 @@ public interface MovieService {
 	List<MovieDto> searchByTitleOrGenre(String title,String genre);
 	
 	List<MovieDto> searchByYearAfter(Integer year);
+	List<MovieDto> searchMovieWithActor(String actorName);
+	List<MovieDto> searchMovieByTitleYear(String title,Integer year);
 }

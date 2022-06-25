@@ -32,6 +32,9 @@ public interface MovieDao extends PagingAndSortingRepository<Movie, Long>{
 	
 	@Query(value="SElECT m FROM Movie m WHERE m.genre IN ('Horror','Action')")
 	List<Movie> findMovieForActionOrHorror();
+	
+	@Query(value="SElECT m FROM Movie m JOIN m.actors act WHERE act.fullName=:actorName")
+	List<Movie> findMovieWhichContainActor(@Param(value = "actorName") String actorName);
 	//search
 	List<Movie> findByGenre(String genre);
 	List<Movie> findByTitleLike(String title);

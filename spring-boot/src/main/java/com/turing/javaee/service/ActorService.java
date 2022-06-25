@@ -9,4 +9,5 @@ public interface ActorService {
 	Optional<Actor> getActorById(Long actorId);
 	Actor saveActor(Actor actor);
 	void deleteActorById(Long actorId);
+	Optional<Actor>  updateActorGender(Long actorId,String gender);
 }

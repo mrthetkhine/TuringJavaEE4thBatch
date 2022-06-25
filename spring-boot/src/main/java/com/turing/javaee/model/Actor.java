@@ -14,6 +14,7 @@ import javax.validation.constraints.NotNull;
 
 import org.hibernate.annotations.Formula;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import lombok.Data;
 import lombok.ToString;
@@ -41,6 +42,7 @@ public class Actor extends BaseEntity implements Serializable {
 	Address address;
 	
 	@ToString.Exclude
+	@JsonIgnore
 	@ManyToMany(fetch = FetchType.LAZY, 
 				cascade = CascadeType.ALL, 
 				mappedBy = "actors")

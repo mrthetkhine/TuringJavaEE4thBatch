@@ -5,9 +5,11 @@ import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.turing.javaee.dao.ActorDao;
 import com.turing.javaee.model.Actor;
+import com.turing.javaee.model.Gender;
 import com.turing.javaee.service.ActorService;
 
 @Service
@@ -33,8 +35,16 @@ public class ActorServiceImpl implements ActorService{
 
 	@Override
 	public void deleteActorById(Long actorId) {
+		//actorDao.deleteById(actorId);
 		actorDao.deleteById(actorId);
 		
+	}
+	@Transactional
+	@Override
+	public Optional<Actor> updateActorGender(Long actorId,String gender)
+	{
+		this.actorDao.updateActorGenderById(actorId, Gender.valueOf(gender));
+		return this.actorDao.findById(actorId);
 	}
 
 }
