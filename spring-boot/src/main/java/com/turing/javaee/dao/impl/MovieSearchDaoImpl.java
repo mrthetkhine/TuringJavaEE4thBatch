@@ -167,7 +167,8 @@ public class MovieSearchDaoImpl extends AbstractJpaDAO<Movie> implements MovieSe
 		session.enableFilter("yearFilter")
 		  .setParameter("year", year);
 		Query query = session.createQuery("from Movie");
-		
-		return query.list();
+		List<Movie> result = query.list();
+		session.disableFilter("yearFilter");
+		return result;
 	}
 }
