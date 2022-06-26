@@ -164,8 +164,8 @@ public class MovieSearchDaoImpl extends AbstractJpaDAO<Movie> implements MovieSe
 	public List<Movie> findAllMovieByYear(Integer year) {
 		log.info("search By searchByYear "+year);
 		Session session = this.entityManager.unwrap(Session.class);
-		session.enableFilter("yearFilter");
-		//  .setParameter("year", year);
+		session.enableFilter("yearFilter")
+		  .setParameter("year", year);
 		Query query = session.createQuery("from Movie");
 		
 		return query.list();

@@ -19,8 +19,15 @@ import lombok.Data;
 import lombok.ToString;
 import lombok.extern.slf4j.Slf4j;
 
-@FilterDef(name = "yearFilter"
-, defaultCondition=" year =1990")
+
+@FilterDef(
+	    name = "yearFilter", 
+	    parameters = @ParamDef(name = "year", type = "integer") 
+	)	
+@Filters( {
+    @Filter(name="yearFilter", condition="year=:year"),
+  
+} )
 @Slf4j
 @Data
 @ToString
