@@ -7,6 +7,11 @@ import java.util.List;
 import javax.persistence.*;
 import javax.validation.constraints.NotEmpty;
 
+import org.hibernate.annotations.Filter;
+import org.hibernate.annotations.FilterDef;
+import org.hibernate.annotations.Filters;
+import org.hibernate.annotations.ParamDef;
+
 import com.turing.javaee.controller.rest.MovieController;
 import com.turing.javaee.model.BaseEntity;
 
@@ -14,6 +19,8 @@ import lombok.Data;
 import lombok.ToString;
 import lombok.extern.slf4j.Slf4j;
 
+@FilterDef(name = "yearFilter"
+, defaultCondition=" year =1990")
 @Slf4j
 @Data
 @ToString
@@ -53,6 +60,7 @@ public class Movie extends BaseEntity implements Serializable {
             inverseJoinColumns = { @JoinColumn(name = "actor_id") })
 	List<Actor> actors;
 	
+	/*
 	@PostLoad
 	private void postLoad()
 	{
@@ -68,5 +76,6 @@ public class Movie extends BaseEntity implements Serializable {
     private void postUpdateFunction(){
         log.info("PostUpdate method called");
     }
+    */
     
 }

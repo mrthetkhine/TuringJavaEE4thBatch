@@ -15,6 +15,7 @@ import org.springframework.transaction.annotation.Transactional;
 import com.turing.javaee.controller.rest.MovieController;
 import com.turing.javaee.dao.MovieDao;
 import com.turing.javaee.dao.MovieSearchDao;
+import com.turing.javaee.dto.GenreCount;
 import com.turing.javaee.dto.GenreCountDto;
 import com.turing.javaee.dto.MovieDto;
 import com.turing.javaee.model.Movie;
@@ -103,6 +104,14 @@ public class MovieServiceImpl implements MovieService{
 		return genreCounts;
 	}
 	@Override
+	public List<GenreCount> getMovieGenreCountByCriteria()
+	{
+		//List<GenreCount> genreCounts = this.movieSearchDao.getMovieGenreCount();
+		List<GenreCount> genreCounts = this.movieSearchDao.getMovieGenreCountHavingMoreThan(1L);
+		log.info("Genres Counts " + genreCounts.size());
+		return genreCounts;
+	}
+	@Override
 	public List<MovieDto> findMovieOrderByYear()
 	{
 		Iterable<Movie> movies = movieDao.findAllByOrderByYearDesc();
@@ -121,7 +130,8 @@ public class MovieServiceImpl implements MovieService{
 	@Override
 	public List<MovieDto> findByTitle(String title)
 	{
-		Iterable<Movie> movies = movieDao.getAllMovieByTitle(title);
+		//Iterable<Movie> movies = movieDao.getAllMovieByTitle(title);
+		Iterable<Movie> movies = movieSearchDao.findMovieByTitle(title);
 		return entitiesToDtoList(movies);
 	}
 	@Override
@@ -151,9 +161,16 @@ public class MovieServiceImpl implements MovieService{
 		return entitiesToDtoList(movies);
 	}
 	@Override
+	public List<MovieDto> searchByYear(Integer year) {
+		
+		Iterable<Movie> movies = movieSearchDao.findAllMovieByYear(year);
+		return entitiesToDtoList(movies);
+	}
+	@Override
 	public List<MovieDto> searchMovieWithActor(String actorName)
 	{
-		Iterable<Movie> movies = movieDao.findMovieWhichContainActor(actorName);
+		//Iterable<Movie> movies = movieDao.findMovieWhichContainActor(actorName);
+		Iterable<Movie> movies = movieSearchDao.findMovieWhichContainActor(actorName);
 		return entitiesToDtoList(movies);
 	}
 	@Override
@@ -162,4 +179,5 @@ public class MovieServiceImpl implements MovieService{
 		Iterable<Movie> movies = movieSearchDao.findMovieByTitleYear(title, year);
 		return entitiesToDtoList(movies);
 	}
+	
 }

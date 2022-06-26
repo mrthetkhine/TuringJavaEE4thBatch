@@ -21,6 +21,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.turing.javaee.controller.BookController;
 import com.turing.javaee.dao.MovieDao;
+import com.turing.javaee.dto.GenreCount;
 import com.turing.javaee.dto.GenreCountDto;
 import com.turing.javaee.dto.MovieDto;
 import com.turing.javaee.model.Movie;
@@ -86,7 +87,8 @@ public class MovieController {
 	ResponseEntity<Object> getGenreCount()
 	{
 		log.info("get getGenreCount");
-		List<GenreCountDto> genreCount = this.movieService.getMovieGenreCount();
+		//List<GenreCountDto> genreCount = this.movieService.getMovieGenreCount();
+		List<GenreCount> genreCount = this.movieService.getMovieGenreCountByCriteria();
 		return ResponseEntity.ok(genreCount);
 	}
 	@GetMapping("/searchActionOrHorrorMovie")
@@ -129,6 +131,13 @@ public class MovieController {
 	{
 		log.info("search By serchByTitleYear");
 		List<MovieDto> movies = this.movieService.searchMovieByTitleYear(title, year);
+		return ResponseEntity.ok(movies);
+	}
+	@GetMapping("/searchByYear")
+	ResponseEntity<List<MovieDto>> searchByYear(@RequestParam Integer year)
+	{
+		log.info("search By searchByYear "+year);
+		List<MovieDto> movies = this.movieService.searchByYear(year);
 		return ResponseEntity.ok(movies);
 	}
 	@GetMapping("/searchByYearAfter")
