@@ -2,17 +2,19 @@ package com.turing.javaee.dao;
 
 import java.util.List;
 
+import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.data.repository.PagingAndSortingRepository;
 import org.springframework.data.repository.query.Param;
+import org.springframework.data.repository.query.QueryByExampleExecutor;
 import org.springframework.stereotype.Repository;
 
 import com.turing.javaee.dto.GenreCountDto;
 import com.turing.javaee.model.Movie;
 
 @Repository
-public interface MovieDao extends PagingAndSortingRepository<Movie, Long>{
+public interface MovieDao extends PagingAndSortingRepository<Movie, Long>,JpaSpecificationExecutor<Movie>,QueryByExampleExecutor<Movie>{
 	
 	//JPQL->HQL
 	@Query("SElECT m from Movie m")

@@ -7,6 +7,8 @@ import java.util.Optional;
 
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Example;
+import org.springframework.data.domain.ExampleMatcher;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
@@ -21,6 +23,7 @@ import com.turing.javaee.dto.MovieDto;
 import com.turing.javaee.model.Movie;
 import com.turing.javaee.model.MovieDetail;
 import com.turing.javaee.service.MovieService;
+import com.turing.javaee.service.specification.MovieSpecification;
 
 import lombok.extern.slf4j.Slf4j;
 @Slf4j
@@ -131,7 +134,20 @@ public class MovieServiceImpl implements MovieService{
 	public List<MovieDto> findByTitle(String title)
 	{
 		//Iterable<Movie> movies = movieDao.getAllMovieByTitle(title);
-		Iterable<Movie> movies = movieSearchDao.findMovieByTitle(title);
+		//Iterable<Movie> movies = movieSearchDao.findMovieByTitle(title);
+		
+		//QBE
+		Movie movie = new Movie();
+		movie.setTitle(title);
+		ExampleMatcher matcher = ExampleMatcher
+										.matchingAll()
+										//for all string
+										.withStringMatcher(ExampleMatcher.StringMatcher.CONTAINING);
+										//for property title.
+										//.withMatcher("title", match->match.startsWith().ignoreCase());
+		Example<Movie> movieExample = Example.of(movie,matcher);
+		
+		Iterable<Movie> movies = movieDao.findAll(movieExample);
 		return entitiesToDtoList(movies);
 	}
 	@Override
@@ -162,8 +178,11 @@ public class MovieServiceImpl implements MovieService{
 	}
 	@Override
 	public List<MovieDto> searchByYear(Integer year) {
-		
+		/*
 		Iterable<Movie> movies = movieSearchDao.findAllMovieByYear(year);
+		return entitiesToDtoList(movies);
+		*/
+		Iterable<Movie> movies = movieDao.findAll(MovieSpecification.getAllMovieByYear(year));
 		return entitiesToDtoList(movies);
 	}
 	@Override
@@ -176,7 +195,26 @@ public class MovieServiceImpl implements MovieService{
 	@Override
 	public List<MovieDto> searchMovieByTitleYear(String title,Integer year)
 	{
-		Iterable<Movie> movies = movieSearchDao.findMovieByTitleYear(title, year);
+		//Iterable<Movie> movies = movieSearchDao.findMovieByTitleYear(title, year);
+		//Iterable<Movie> movies = movieDao.findAll(MovieSpecification.getMovieByTitleYear(title, year));
+		//QBE
+		Movie movie = new Movie();
+		if(title != null)
+		{
+			movie.setTitle(title);
+		}
+		if(year != null)
+		{
+			movie.setYear(year);
+		}
+		ExampleMatcher matcher = ExampleMatcher
+								//AND
+								//.matchingAll();
+								//OR
+								.matchingAny();
+		Example<Movie> movieExample = Example.of(movie,matcher);
+		
+		Iterable<Movie> movies = movieDao.findAll(movieExample);
 		return entitiesToDtoList(movies);
 	}
 	

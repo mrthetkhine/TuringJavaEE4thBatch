@@ -28,6 +28,7 @@ import lombok.extern.slf4j.Slf4j;
     @Filter(name="yearFilter", condition="year=:year"),
   
 } )
+
 @Slf4j
 @Data
 @ToString
