@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>Spring Demo</title>
+<header th:insert="fragments/header.html :: header"> </header>
+
+</head>
+<body>
+	<h1>Welcome to our Spring Boot</h1>
+	<img th:src="@{/images/download.jpeg}"/>
+	
+	<div th:insert="fragments/footer :: footer"></div>
+	
+</body>
+</html>
