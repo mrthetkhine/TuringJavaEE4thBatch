@@ -57,6 +57,15 @@ public class HomeController {
 		
 		return "login";
 	}
+	/*
+	@GetMapping("/userAccountInfo")
+	String page(Model model){
+		
+		log.info("controller userAccountInfo");
+		
+		return "userAccountInfo";
+	}*/
+	
 	@GetMapping("/userAccountInfo")
 	String page(Model model){
 		
@@ -71,6 +80,7 @@ public class HomeController {
 		}
 		return "userAccountInfo";
 	}
+	
 	@GetMapping("/admin")
 	String admin(Model model){
 		
