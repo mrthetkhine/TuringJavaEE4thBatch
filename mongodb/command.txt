@@ -1,0 +1,68 @@
+use javaee_fourth_batch;
+
+db.movies.insertOne({
+    title : "Titanic",
+    genre :"Documentary",
+    year : 1995,
+    actors : ["Leonardo Decaprio","Kate Winslet"]
+});
+
+db.movies.insertMany([{
+    title : "Inception",
+    genre :"Sci-Fi",
+    year : 1995,
+    actors : ["Leonardo DiCaprio"]
+},{
+    title : "Matrix",
+    genre :"Sci-Fi",
+    year : 1995,
+    actors : [ {
+        name : "Keanu Reeves",
+        gender : "Male"
+    }],
+    director : ["Lana Wachowski "]
+}]);
+
+db.movies.find();
+
+//AND
+db.movies.find({ "year":1995,"title":"Titanic" });
+
+//OR
+db.movies.find({$or:[ { "year":1995},{"title":"Titanic" }]});
+
+db.movies.insertOne({
+    title : "Titanic2",
+    genre :"Documentary",
+    year : 1995,
+    director : {
+        gender:"Male"
+    }
+});
+
+db.movies.find({"director.gender":"Male"});
+
+db.movies.find({
+    director:{
+        gender:"Male"
+    }
+});
+
+db.movies.find({
+    year:{
+        $lt: 2000    
+    }
+})
+
+db.movies.find(
+{
+    year:{
+        $lte: 1995    
+    }
+});
+
+db.movies.find({ actors: { $all:  ["Leonardo Decaprio","Kate Winslet"] } });
+
+db.movies.find({ actors: "Leonardo Decaprio" });
+
+db.movies.find({ year: { $gte : 1995, $lt:2000 } });
