@@ -66,3 +66,52 @@ db.movies.find({ actors: { $all:  ["Leonardo Decaprio","Kate Winslet"] } });
 db.movies.find({ actors: "Leonardo Decaprio" });
 
 db.movies.find({ year: { $gte : 1995, $lt:2000 } });
+
+//Project
+db.movies.find({},{title:1})
+
+db.movies.find({},{title:1,_id:0})
+
+db.movies.find({},{_id:0})
+
+db.movies.find({},{actors:{ $slice:-1} })
+
+db.movies.insertOne({
+    title : "Matrix 2",
+    genre :null,
+    year : 2000,
+    director : {
+        gender:"Male"
+    }
+});
+db.movies.find({genre2:{ $exists: false }})
+
+62d400a6f3162a310297eb6f
+
+db.movies.updateOne({_id:ObjectId("62d400a6f3162a310297eb6f")},[ 
+    {
+        $set:{title:"Matrix Update",modified: "$$NOW"}
+    }
+    ]);
+db.movies.find().pretty();
+
+db.movies.updateMany({year:1995}, { $set:{year:1996}})
+
+db.movies.updateOne({_id:ObjectId("62d400a6f3162a310297eb6f")}, 
+    [{
+        $unset:["modified"]
+    }]
+    );
+
+db.movies.replaceOne({_id:ObjectId("62d400a6f3162a310297eb6f")}, 
+{
+	"title" : "Matrix Replaced",
+	"genre" : null,
+	"year" : 2000,
+	"director" : {
+		"gender" : "Male"
+	}
+}
+);
+db.movies.find({_id:ObjectId("62d400a6f3162a310297eb6f")});
+db.movies.deleteOne({_id:ObjectId("62d400a6f3162a310297eb6f")});
