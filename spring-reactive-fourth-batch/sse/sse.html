@@ -1,0 +1,55 @@
+<html>
+    <div id="container">  
+
+    </div>
+<head>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
+    <script src="jquery.sse.js"></script>
+    <script>
+        console.log('-- START --');
+        var w = $.SSE('http://localhost:8080/api/movies/stream', {
+            onOpen: function (e) {
+                console.log("Open");
+                console.log(e);
+            },
+            onEnd: function (e) {
+                console.log("End");
+                console.log(e);
+            },
+            onError: function (e) {
+                console.log("Could not connect");
+            },
+            onMessage: function (e) {
+                console.log("Message");
+                $("#container").html("<div>"+e.data+"</div>");
+                console.log(e);
+            },
+            options: {
+                forceAjax: false
+            },
+            events: {
+                myEvent: function (e) {
+                    console.log('Custom Event');
+                    console.log(e);
+                }
+            },
+//            headers: {
+//                'Authorization': 'Bearer 000000000000000000000'
+//            }
+        });
+        console.log(w.start());
+        console.log('-- END --');
+    </script>
+
+
+</head>
+
+<body>
+<h1>Actions</h1>
+
+<input type="button" value="Start Listen" onclick="w.start()"/>
+<input type="button" value="Stop Listen" onclick="w.stop()"/>
+
+</body>
+
+</html>
