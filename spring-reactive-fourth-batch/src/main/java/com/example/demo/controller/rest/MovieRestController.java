@@ -24,6 +24,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.example.demo.model.Movie;
+import com.example.demo.model.MovieDetail;
+import com.example.demo.repository.MovieDetailRepository;
 import com.example.demo.repository.MovieRepository;
 
 
@@ -35,6 +37,9 @@ import reactor.core.publisher.Mono;
 public class MovieRestController {
 	@Autowired
 	MovieRepository movieRepository;
+	
+	@Autowired
+	MovieDetailRepository movieDetailRepository;
 	
 	@Autowired
 	private MongoTemplate mongoTemplate;
@@ -87,7 +92,22 @@ public class MovieRestController {
     }
 	@PostMapping
     public Mono<Movie> createMovie(@Valid @RequestBody Movie movie) {
-        return movieRepository.save(movie);
+		
+		if(movie.getDetails()!=null)
+		{
+			
+			return this.movieDetailRepository.save(movie.getDetails())
+				   .flatMap((movieDetails)->{
+					   movie.setDetails(movieDetails);
+					   return this.movieRepository.save(movie);
+				   });
+			
+		}
+		else
+		{
+			 return movieRepository.save(movie);
+		}
+       
     }
 	@PutMapping("/{id}")
     public Mono<ResponseEntity<Movie>> updateMovie(@PathVariable(value = "id") String movieId,
