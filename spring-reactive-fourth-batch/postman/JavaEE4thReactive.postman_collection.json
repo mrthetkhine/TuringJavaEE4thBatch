@@ -1,10 +1,74 @@
 {
 	"info": {
-		"_postman_id": "bcebd283-e878-4c29-ad4d-b7bf34e7916d",
+		"_postman_id": "f0e7a4f0-2433-46c1-adeb-2a86ecb8529c",
 		"name": "JavaEE4thReactive",
-		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "5339096"
 	},
 	"item": [
+		{
+			"name": "Auth",
+			"item": [
+				{
+					"name": "Register",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"username\":\"admin\",\n    \"email\":\"admin@gmail.com\",\n    \"password\":\"admin\",\n    \"roles\":[ {\n        \"role\":\"ADMIN\"\n    }]\n}"
+						},
+						"url": {
+							"raw": "http://localhost:8080/register",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"register"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Login",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"username\":\"admin\",\n    \"password\":\"admin\"\n \n}"
+						},
+						"url": {
+							"raw": "http://localhost:8080/login",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"login"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
 		{
 			"name": "GetMovie",
 			"request": {
@@ -30,7 +94,13 @@
 			"name": "GetMovies",
 			"request": {
 				"method": "GET",
-				"header": [],
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhZG1pbiIsImF1dGgiOlt7ImF1dGhvcml0eSI6IkFETUlOIn1dLCJpYXQiOjE2NTkxODgxMjksImV4cCI6MTY1OTE5MTcyOX0.52buUImfBs_tXbSZGv4yro3gfld7ai91KTuCgx3qEAk",
+						"type": "text"
+					}
+				],
 				"url": {
 					"raw": "http://localhost:8080/api/movies",
 					"protocol": "http",
