@@ -1,0 +1,52 @@
+<html>
+   
+   
+    <script>
+     let objs = [
+        {
+            name : "Tk",
+            age : 37,
+            gender : "Male"
+        },
+        {
+            name : "Aung Aung",
+            age : 20,
+            gender : "Male"
+        },
+        {
+            name : "Win Win",
+            age : 20,
+            gender : "Female"
+        },
+        {
+            name : "Hla Hla",
+            age : 30,
+            gender : "Female"
+        },
+     ]
+
+     let maleList = [];
+     for(let i=0;i< objs.length;i++)
+     {
+        if(objs[i].gender == "Male")
+        {
+            maleList.push(objs[i]);
+        }
+     }
+     console.log("Male list ",maleList);
+
+     let totalAge = 0;
+     for(let i=0;i< maleList.length;i++)
+     {
+        totalAge += maleList[i].age;
+     }
+     console.log("Average ", totalAge/maleList.length);
+
+     let fpMaleList = objs.filter(obj=>obj.gender=="Male")
+                          .map(obj=>obj.age);
+     console.log("FP Male List ",fpMaleList);
+
+     let fpAverage = fpMaleList.reduce( (a,b)=> a+b) / fpMaleList.length ;
+     console.log("FP Average ",fpAverage);
+    </script>
+</html>
