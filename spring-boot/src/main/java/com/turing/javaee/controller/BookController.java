@@ -86,16 +86,7 @@ public class BookController {
 		if(!bindingResult.hasErrors())
 		{
 			log.info("Save book "+ book);
-			if(book.getId() == null)
-			{
-				this.bookService.saveNewBook(book);
-				return "redirect:/books/new";
-			}
-			else
-			{
-				this.bookService.updateBook(book);
-				return "redirect:/books";
-			}
+			return saveOrUpdateBook(book);
 		
 		}
 		else
@@ -108,6 +99,18 @@ public class BookController {
 		}
 		
 		return "books";
+	}
+	private String saveOrUpdateBook(Book book) {
+		if(book.getId() == null)
+		{
+			this.bookService.saveNewBook(book);
+			return "redirect:/books/new";
+		}
+		else
+		{
+			this.bookService.updateBook(book);
+			return "redirect:/books";
+		}
 	}
 	@GetMapping("/delete/{bookId}")
 	public String deleteBook(@PathVariable Long bookId,Model model)
