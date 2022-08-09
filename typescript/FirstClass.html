@@ -1,0 +1,23 @@
+<html>
+    <script>
+        //Rule 1
+       let func = function(){
+            console.log("Function");
+       }
+       func();
+       //Rule 2
+       function highOrder(f)
+       {
+        console.log("Inside high order");
+        f();
+       }
+       highOrder(func);
+
+       function getFun()
+       {
+        console.log("Inside getFunc");
+        return func;
+       }
+       getFun()();
+    </script>
+</html>

@@ -1,0 +1,15 @@
+var str = "Hello";
+console.log("Typeof str ", typeof str);
+var a = "Hello";
+console.log("Typeof a ", typeof a);
+var num = 3;
+console.log("num/2 ", num / 2);
+console.log("Typeof num ", typeof num);
+var flag = false;
+console.log("Typeof flag ", typeof flag);
+var obj = null;
+console.log("Typeof obj ", typeof obj);
+var another = undefined;
+console.log("Typeof another ", typeof another);
+var k;
+console.log("K ", k);
