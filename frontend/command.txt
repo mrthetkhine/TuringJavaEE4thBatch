@@ -1,0 +1,3 @@
+//Create Component
+ng generate component HelloWorld
+ng generate component components/Parent

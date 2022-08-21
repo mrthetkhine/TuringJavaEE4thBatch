@@ -1,0 +1,12 @@
+<div>
+  Parent
+  Current Name {{currentName}}
+  <button type="button" (click)="onClick()">Inc</button>
+  <app-child [data]="data"></app-child>
+
+  <app-profile *ngFor="let name of names"
+               [name]="name"
+               (nameClick)="childNameClick($event)">
+
+  </app-profile>
+</div>
