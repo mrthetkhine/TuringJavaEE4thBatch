@@ -1,0 +1,8 @@
+<div class="question-box">
+  <label for="item-input">Add an item:</label>
+  <input type="text" id="item-input" #newItem value="{{this.value}}"/>
+  <button type="button" (click)="btnAddClick(newItem.value)">Add</button>
+  <button type="button"
+          [disabled]="updateDisabled"
+          (click)="btnUpdateClick(newItem.value)">Update</button>
+</div>
