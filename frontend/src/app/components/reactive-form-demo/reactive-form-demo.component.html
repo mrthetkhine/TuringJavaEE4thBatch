@@ -1,0 +1,36 @@
+<form [formGroup]="movieForm" (ngSubmit)="formSubmit()">
+  <div class="container row">
+    Movie Form
+
+    <div class="mb-6">
+      <label for="movieName" class="form-label">Movie Name</label>
+      <input type="email" class="form-control"
+             id="movieName"
+             formControlName="name"/>
+      <div class="alert alert-danger" role="alert"
+           *ngIf="movieFormControl.name.touched && movieFormControl.name.errors!['required']">Name Required</div>
+      <!--<div class="alert alert-danger" role="alert"
+           *ngIf="movieFormControl.name.touched && movieFormControl.name.errors!['minLength']">Name must be greater than 3 character</div>-->
+    </div>
+    <div class="mb-6">
+      <label for="year" class="form-label">Year</label>
+      <input class="form-control" id="year" rows="3"
+             formControlName="year"/>
+    </div>
+    <div class="mb-6">
+      <label for="director" class="form-label">Director</label>
+      <input class="form-control" id="director"
+             formControlName="director"/>
+    </div>
+    <div class="mb-6">
+      <label for="year" class="form-label"></label>
+      <button type="submit" class="btn btn-primary"
+              [disabled]="!movieForm.valid" >Submit</button>
+      &nbsp;
+      <button type="button" class="btn btn-primary"
+              (click)="updateName()">Update</button>
+    </div>
+
+  </div>
+
+</form>

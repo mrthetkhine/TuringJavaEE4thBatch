@@ -1,3 +1,5 @@
 //Create Component
 ng generate component HelloWorld
 ng generate component components/Parent
+ng generate directive highlight
+ng generate service logger

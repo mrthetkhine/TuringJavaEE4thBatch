@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
+import { ReactiveFormsModule } from '@angular/forms';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -12,6 +13,9 @@ import { QuestionBoxComponent } from './components/question-box/question-box.com
 import { QuestionItemComponent } from './components/question-item/question-item.component';
 import { QuestionItemV2Component } from './components/question-item-v2/question-item-v2.component';
 import { BorderComponent } from './components/border/border.component';
+import { PipeDemoComponent } from './components/pipe-demo/pipe-demo.component';
+import { HighlightDirective } from './highlight.directive';
+import { ReactiveFormDemoComponent } from './components/reactive-form-demo/reactive-form-demo.component';
 
 @NgModule({
   declarations: [
@@ -24,11 +28,15 @@ import { BorderComponent } from './components/border/border.component';
     QuestionBoxComponent,
     QuestionItemComponent,
     QuestionItemV2Component,
-    BorderComponent
+    BorderComponent,
+    PipeDemoComponent,
+    HighlightDirective,
+    ReactiveFormDemoComponent
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule
+    AppRoutingModule,
+    ReactiveFormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]

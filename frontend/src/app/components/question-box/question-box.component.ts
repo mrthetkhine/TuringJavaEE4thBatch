@@ -1,4 +1,5 @@
 import {Component, OnInit, Output, EventEmitter, Input} from '@angular/core';
+import {LoggerService} from "../../logger.service";
 
 @Component({
   selector: 'app-question-box',
@@ -11,13 +12,15 @@ export class QuestionBoxComponent implements OnInit {
   @Output() updateItemEvent = new EventEmitter<string>();
 
   updateDisabled = false;
-  constructor() { }
+  haveBorder = true;
+  constructor(private logService: LoggerService) { }
 
   ngOnInit(): void {
   }
   btnAddClick(newItem:string)
   {
     this.addItemEvent.emit(newItem);
+    this.logService.log("new Item added")
   }
   btnUpdateClick(updateItem:string)
   {
