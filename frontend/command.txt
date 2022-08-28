@@ -3,3 +3,5 @@ ng generate component HelloWorld
 ng generate component components/Parent
 ng generate directive highlight
 ng generate service logger
+ng generate service service/movie
+ng generate class model/movie --type=model

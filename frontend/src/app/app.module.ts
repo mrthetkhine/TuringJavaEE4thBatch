@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { ReactiveFormsModule } from '@angular/forms';
+import { ModalModule } from 'ngx-bootstrap/modal';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -16,6 +17,7 @@ import { BorderComponent } from './components/border/border.component';
 import { PipeDemoComponent } from './components/pipe-demo/pipe-demo.component';
 import { HighlightDirective } from './highlight.directive';
 import { ReactiveFormDemoComponent } from './components/reactive-form-demo/reactive-form-demo.component';
+import { MovieCounterComponent } from './components/movie-counter/movie-counter.component';
 
 @NgModule({
   declarations: [
@@ -31,12 +33,14 @@ import { ReactiveFormDemoComponent } from './components/reactive-form-demo/react
     BorderComponent,
     PipeDemoComponent,
     HighlightDirective,
-    ReactiveFormDemoComponent
+    ReactiveFormDemoComponent,
+    MovieCounterComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    ModalModule.forRoot()
   ],
   providers: [],
   bootstrap: [AppComponent]

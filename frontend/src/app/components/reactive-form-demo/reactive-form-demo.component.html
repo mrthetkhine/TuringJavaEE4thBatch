@@ -1,36 +1,78 @@
-<form [formGroup]="movieForm" (ngSubmit)="formSubmit()">
-  <div class="container row">
-    Movie Form
 
-    <div class="mb-6">
-      <label for="movieName" class="form-label">Movie Name</label>
-      <input type="email" class="form-control"
-             id="movieName"
-             formControlName="name"/>
-      <div class="alert alert-danger" role="alert"
-           *ngIf="movieFormControl.name.touched && movieFormControl.name.errors!['required']">Name Required</div>
-      <!--<div class="alert alert-danger" role="alert"
-           *ngIf="movieFormControl.name.touched && movieFormControl.name.errors!['minLength']">Name must be greater than 3 character</div>-->
-    </div>
-    <div class="mb-6">
-      <label for="year" class="form-label">Year</label>
-      <input class="form-control" id="year" rows="3"
-             formControlName="year"/>
-    </div>
-    <div class="mb-6">
-      <label for="director" class="form-label">Director</label>
-      <input class="form-control" id="director"
-             formControlName="director"/>
-    </div>
-    <div class="mb-6">
-      <label for="year" class="form-label"></label>
-      <button type="submit" class="btn btn-primary"
-              [disabled]="!movieForm.valid" >Submit</button>
-      &nbsp;
-      <button type="button" class="btn btn-primary"
-              (click)="updateName()">Update</button>
-    </div>
+<button type="button" class="btn btn-primary"
+        (click)="openModal(template)">New Movie</button>
 
+<ng-template #template>
+  <div class="modal-header">
+    <h4 class="modal-title pull-left">New Movie</h4>
+    <button type="button" class="btn-close close pull-right" aria-label="Close" (click)="modalRef?.hide()">
+      <span aria-hidden="true" class="visually-hidden">&times;</span>
+    </button>
   </div>
+  <div class="modal-body">
+    <form [formGroup]="movieForm" (ngSubmit)="formSubmit()">
+      <div class="container row">
+        Movie Form
 
-</form>
+        <div class="mb-6">
+          <label for="movieName" class="form-label">Movie Name</label>
+          <input type="email" class="form-control"
+                 id="movieName"
+                 formControlName="name"/>
+          <div class="alert alert-danger" role="alert"
+               *ngIf="movieFormControl.name.touched && movieFormControl.name.errors?.['required']">Name Required</div>
+          <div class="alert alert-danger" role="alert"
+               *ngIf="movieFormControl.name.touched && movieFormControl.name.errors?.['minlength']">Name must be greater than 3 character</div>
+        </div>
+        <div class="mb-6">
+          <label for="year" class="form-label">Year</label>
+          <input class="form-control" id="year" rows="3"
+                 formControlName="year" (keypress)="keyPress($event)"/>
+          <div class="alert alert-danger" role="alert"
+               *ngIf="movieFormControl.year.touched && movieFormControl.year.errors?.['required']">Year Required</div>
+          <div class="alert alert-danger" role="alert"
+               *ngIf="movieFormControl.year.touched && movieFormControl.year.errors?.['pattern']">Only numbers are allowed</div>
+        </div>
+        <div class="mb-6">
+          <label for="director" class="form-label">Director</label>
+          <input class="form-control" id="director"
+                 formControlName="director"/>
+          <div class="alert alert-danger" role="alert"
+               *ngIf="movieFormControl.director.touched && movieFormControl.director.errors?.['required']">Director Required</div>
+        </div>
+        <div class="mb-6">
+          <label for="year" class="form-label"></label>
+          <button type="submit" class="btn btn-primary"
+                  [disabled]="!movieForm.valid" >Submit</button>
+          &nbsp;
+          <button type="button" class="btn btn-primary"
+                  (click)="updateName()">Update</button>
+        </div>
+
+      </div>
+
+    </form>
+  </div>
+</ng-template>
+
+<table class="table table-bordered container-lg">
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Director</th>
+      <th>Year</th>
+      <th>Action</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let movie of movies;index as i;">
+      <td>{{movie.name}}</td>
+      <td>{{movie.director}}</td>
+      <td>{{movie.year}}</td>
+      <td>
+        <button type="button" class="btn btn-primary" (click)="editMovie(i)">Edit</button>
+      </td>
+    </tr>
+
+  </tbody>
+</table>
