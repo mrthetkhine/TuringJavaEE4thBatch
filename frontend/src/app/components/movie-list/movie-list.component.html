@@ -1,0 +1,23 @@
+<table class="table table-bordered container-lg">
+  <thead>
+  <tr>
+    <th>Name</th>
+    <th>Director</th>
+    <th>Year</th>
+    <th>Action</th>
+  </tr>
+  </thead>
+  <tbody>
+  <tr *ngFor="let movie of movies;index as i;">
+    <td>{{movie.name}}</td>
+    <td>{{movie.director}}</td>
+    <td>{{movie.year}}</td>
+    <td>
+      <button type="button" class="btn btn-primary" (click)="btnEditClick(i)">Edit</button>
+      &nbsp;
+      <button type="button" class="btn btn-danger" (click)="btnDeleteClick(i)">Delete</button>
+    </td>
+  </tr>
+
+  </tbody>
+</table>

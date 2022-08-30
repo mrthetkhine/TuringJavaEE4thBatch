@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { ReactiveFormsModule } from '@angular/forms';
+import { FormsModule } from '@angular/forms';
 import { ModalModule } from 'ngx-bootstrap/modal';
 
 import { AppRoutingModule } from './app-routing.module';
@@ -18,6 +19,8 @@ import { PipeDemoComponent } from './components/pipe-demo/pipe-demo.component';
 import { HighlightDirective } from './highlight.directive';
 import { ReactiveFormDemoComponent } from './components/reactive-form-demo/reactive-form-demo.component';
 import { MovieCounterComponent } from './components/movie-counter/movie-counter.component';
+import { MovieListComponent } from './components/movie-list/movie-list.component';
+import { TemplateFormDemoComponent } from './components/template-form-demo/template-form-demo.component';
 
 @NgModule({
   declarations: [
@@ -34,12 +37,15 @@ import { MovieCounterComponent } from './components/movie-counter/movie-counter.
     PipeDemoComponent,
     HighlightDirective,
     ReactiveFormDemoComponent,
-    MovieCounterComponent
+    MovieCounterComponent,
+    MovieListComponent,
+    TemplateFormDemoComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     ReactiveFormsModule,
+    FormsModule,
     ModalModule.forRoot()
   ],
   providers: [],

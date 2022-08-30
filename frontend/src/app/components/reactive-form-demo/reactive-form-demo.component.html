@@ -1,19 +1,18 @@
 
 <button type="button" class="btn btn-primary"
-        (click)="openModal(template)">New Movie</button>
+        (click)="newMovieClick()">New Movie</button>
 
 <ng-template #template>
+  <form [formGroup]="movieForm" (ngSubmit)="saveOrUpdateMovie()">
   <div class="modal-header">
-    <h4 class="modal-title pull-left">New Movie</h4>
+    <h4 class="modal-title pull-left">{{this.editMode?'Edit Movie':'New Movie'}}</h4>
     <button type="button" class="btn-close close pull-right" aria-label="Close" (click)="modalRef?.hide()">
       <span aria-hidden="true" class="visually-hidden">&times;</span>
     </button>
   </div>
   <div class="modal-body">
-    <form [formGroup]="movieForm" (ngSubmit)="formSubmit()">
-      <div class="container row">
-        Movie Form
 
+      <div class="container row">
         <div class="mb-6">
           <label for="movieName" class="form-label">Movie Name</label>
           <input type="email" class="form-control"
@@ -40,39 +39,30 @@
           <div class="alert alert-danger" role="alert"
                *ngIf="movieFormControl.director.touched && movieFormControl.director.errors?.['required']">Director Required</div>
         </div>
-        <div class="mb-6">
-          <label for="year" class="form-label"></label>
-          <button type="submit" class="btn btn-primary"
-                  [disabled]="!movieForm.valid" >Submit</button>
-          &nbsp;
-          <button type="button" class="btn btn-primary"
-                  (click)="updateName()">Update</button>
+        <div>
+
         </div>
+
 
       </div>
 
-    </form>
+
   </div>
+  <div class="modal-footer">
+    <div class="mb-6">
+      <label for="year" class="form-label"></label>
+      <button type="submit" class="btn btn-primary"
+              [disabled]="!movieForm.valid" >{{this.editMode?'Update':'Save'}}</button>
+      &nbsp;
+      <button type="button" class="btn btn-secondary"
+              (click)="closeMovieModal()">Close</button>
+    </div>
+  </div>
+  </form>
 </ng-template>
 
-<table class="table table-bordered container-lg">
-  <thead>
-    <tr>
-      <th>Name</th>
-      <th>Director</th>
-      <th>Year</th>
-      <th>Action</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr *ngFor="let movie of movies;index as i;">
-      <td>{{movie.name}}</td>
-      <td>{{movie.director}}</td>
-      <td>{{movie.year}}</td>
-      <td>
-        <button type="button" class="btn btn-primary" (click)="editMovie(i)">Edit</button>
-      </td>
-    </tr>
+<app-movie-list [movies]="movies"
+                (editClickEvent)="editBtnClick($event)"
+                (deleteClickEvent)="btnDeleteMovieClick($event)">
 
-  </tbody>
-</table>
+</app-movie-list>

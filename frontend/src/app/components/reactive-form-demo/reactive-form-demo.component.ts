@@ -1,6 +1,8 @@
-import { Component, OnInit,TemplateRef } from '@angular/core';
+import {Component, OnInit, TemplateRef, ViewChild} from '@angular/core';
 import {FormControl, FormGroup, Validators,FormBuilder} from '@angular/forms';
+
 import { BsModalService, BsModalRef } from 'ngx-bootstrap/modal';
+import Swal from 'sweetalert2';
 import {Movie} from "../../model/movie.model";
 import {MovieService} from "../../service/movie.service";
 @Component({
@@ -10,9 +12,11 @@ import {MovieService} from "../../service/movie.service";
 })
 export class ReactiveFormDemoComponent implements OnInit {
 
+  @ViewChild('template') template:any = null;
   modalRef?: BsModalRef;
   movieForm;
   movies: Array<Movie> = [];
+  editMode = false;
   /*
   movieForm = new FormGroup({
     name: new FormControl('',[
@@ -32,7 +36,7 @@ export class ReactiveFormDemoComponent implements OnInit {
         Validators.required,
         Validators.minLength(4)
       ]],
-      year: ['',[Validators.required, Validators.pattern("^[0-9]*$"),]],
+      year: [0,[Validators.required, Validators.pattern("^[0-9]*$"),]],
       director: ['',[Validators.required]]
     });
     this.movieService.movies.subscribe(movies=>{
@@ -40,8 +44,18 @@ export class ReactiveFormDemoComponent implements OnInit {
       this.movies = movies;
     });
   }
+  newMovieClick()
+  {
+    this.editMode = false;
+    this.movieForm.reset();
+    this.openModal(this.template);
+  }
   openModal(template: TemplateRef<any>) {
     this.modalRef = this.modalService.show(template);
+  }
+  closeMovieModal()
+  {
+    this.modalRef?.hide();
   }
 
   ngOnInit(): void {
@@ -54,19 +68,62 @@ export class ReactiveFormDemoComponent implements OnInit {
       event.preventDefault();
     }
   }
-  editMovie(index:number)
+  editBtnClick(index:number)
   {
     console.log("Edit Movie ",this.movies[index]);
+    let movie = this.movies[index];
+    this.movieForm.patchValue({...movie});
+    this.editMode = true;
+    this.modalRef = this.modalService.show(this.template);
   }
-  formSubmit()
+  showDeleteMovieDialog(movieName:string)
   {
-    console.log('MovieName ',this.movieForm.value);
-    //console.log('Year ',this.year.value);
-    let movie = {...this.movieForm.value};
+    return Swal.fire({
+      title: 'Are you sure you want to delete '+movieName+' ?',
+      /* text: "You won't be able to revert this!",*/
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#3085d6',
+      cancelButtonColor: '#d33',
+      confirmButtonText: 'Yes, delete it!'
+    })
+  }
+  btnDeleteMovieClick(index:number)
+  {
+    let movie = this.movies[index];
+    console.log('Delete movie ',movie);
+    this.showDeleteMovieDialog(movie.name).then((result) => {
+      if (result.isConfirmed) {
+        this.deleteMovie(index);
+      }
+    })
+  }
 
-    this.movieService.addMovie(movie);
+  private deleteMovie(index:number) {
+    this.movieService.deleteMovie(index);
+    Swal.fire(
+      'Deleted!',
+      'Your file has been deleted.',
+      'success'
+    )
+  }
+
+  saveOrUpdateMovie()
+  {
+    let movie = this.movieForm.value as Movie;
+    if(this.editMode == false)
+    {
+      console.log('MovieName ',this.movieForm.value);
+      //console.log('Year ',this.year.value);
+      this.movieService.addMovie(movie);
+      this.movieForm.reset();
+    }
+    else
+    {
+      console.log('Update Movie');
+      this.movieService.updateMovie(movie);
+    }
     this.modalRef?.hide();
-    this.movieForm.reset();
   }
   updateName()
   {
