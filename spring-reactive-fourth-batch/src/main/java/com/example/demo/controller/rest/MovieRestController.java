@@ -33,6 +33,7 @@ import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 
 @RestController
+@CrossOrigin
 @RequestMapping("api/movies")
 public class MovieRestController {
 	@Autowired

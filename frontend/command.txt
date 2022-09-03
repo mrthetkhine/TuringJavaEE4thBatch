@@ -5,3 +5,4 @@ ng generate directive highlight
 ng generate service logger
 ng generate service service/movie
 ng generate class model/movie --type=model
+ng generate component page/HomePage

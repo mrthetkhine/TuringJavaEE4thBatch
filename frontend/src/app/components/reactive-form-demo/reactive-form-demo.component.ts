@@ -43,6 +43,9 @@ export class ReactiveFormDemoComponent implements OnInit {
       console.log('Data movie changes ',movies);
       this.movies = movies;
     });
+   /* this.movieService.fetchAllMovie().subscribe(movies=>{
+      this.movies = movies;
+    })*/
   }
   newMovieClick()
   {
@@ -115,7 +118,7 @@ export class ReactiveFormDemoComponent implements OnInit {
     {
       console.log('MovieName ',this.movieForm.value);
       //console.log('Year ',this.year.value);
-      this.movieService.addMovie(movie);
+      this.movieService.saveMovie(movie);
       this.movieForm.reset();
     }
     else

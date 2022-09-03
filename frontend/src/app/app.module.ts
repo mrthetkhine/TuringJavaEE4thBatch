@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { ReactiveFormsModule } from '@angular/forms';
 import { FormsModule } from '@angular/forms';
+import { HttpClientModule } from '@angular/common/http';
 import { ModalModule } from 'ngx-bootstrap/modal';
 
 import { AppRoutingModule } from './app-routing.module';
@@ -21,6 +22,11 @@ import { ReactiveFormDemoComponent } from './components/reactive-form-demo/react
 import { MovieCounterComponent } from './components/movie-counter/movie-counter.component';
 import { MovieListComponent } from './components/movie-list/movie-list.component';
 import { TemplateFormDemoComponent } from './components/template-form-demo/template-form-demo.component';
+import { ChangeDetectionDemoComponent } from './components/change-detection-demo/change-detection-demo.component';
+import { HomePageComponent } from './page/home-page/home-page.component';
+import { MovieListPageComponent } from './page/movie-list-page/movie-list-page.component';
+import { MovieDetailPageComponent } from './page/movie-detail-page/movie-detail-page.component';
+import { NotFoundComponent } from './page/not-found/not-found.component';
 
 @NgModule({
   declarations: [
@@ -39,13 +45,19 @@ import { TemplateFormDemoComponent } from './components/template-form-demo/templ
     ReactiveFormDemoComponent,
     MovieCounterComponent,
     MovieListComponent,
-    TemplateFormDemoComponent
+    TemplateFormDemoComponent,
+    ChangeDetectionDemoComponent,
+    HomePageComponent,
+    MovieListPageComponent,
+    MovieDetailPageComponent,
+    NotFoundComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     ReactiveFormsModule,
     FormsModule,
+    HttpClientModule,
     ModalModule.forRoot()
   ],
   providers: [],

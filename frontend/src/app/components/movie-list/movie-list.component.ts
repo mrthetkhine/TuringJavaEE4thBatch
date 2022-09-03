@@ -1,5 +1,6 @@
 import {Component, Input, OnInit, Output,EventEmitter} from '@angular/core';
 import {Movie} from "../../model/movie.model";
+import {Router} from "@angular/router";
 
 @Component({
   selector: 'app-movie-list',
@@ -12,7 +13,7 @@ export class MovieListComponent implements OnInit {
   @Output() editClickEvent = new EventEmitter<number>();
   @Output() deleteClickEvent = new EventEmitter<number>();
 
-  constructor() { }
+  constructor( private router: Router) { }
 
   ngOnInit(): void {
   }
@@ -23,5 +24,12 @@ export class MovieListComponent implements OnInit {
   btnDeleteClick(index:number)
   {
     this.deleteClickEvent.emit(index);
+  }
+  btnDetailClick(index:number)
+  {
+    console.log("Btn Movie Detail Click",index);
+    this.router.navigate(['/movies/'+index]).then(data=>{
+      console.log("After navigated");
+    });
   }
 }
