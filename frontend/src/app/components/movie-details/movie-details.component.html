@@ -1,0 +1,20 @@
+<div>
+  <div>
+    Name {{movie.name}}
+  </div>
+  <div>
+    Year {{movie.year}}
+  </div>
+  <div>
+    Director {{movie.director}}
+  </div>
+  <div>
+    Details {{movie.details?.details}}
+  </div>
+  <div>
+    Actors
+    <div *ngFor="let actor of movie?.actors;index as i;">
+        <div>Actor Name {{actor.firstName + ' '+actor.lastName}}</div>
+    </div>
+  </div>
+</div>

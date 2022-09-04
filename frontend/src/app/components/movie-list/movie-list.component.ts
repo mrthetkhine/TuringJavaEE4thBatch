@@ -25,7 +25,7 @@ export class MovieListComponent implements OnInit {
   {
     this.deleteClickEvent.emit(index);
   }
-  btnDetailClick(index:number)
+  btnDetailClick(index:string)
   {
     console.log("Btn Movie Detail Click",index);
     this.router.navigate(['/movies/'+index]).then(data=>{

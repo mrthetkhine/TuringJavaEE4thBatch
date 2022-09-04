@@ -1,0 +1,43 @@
+<div class="container-fluid">
+
+
+  <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
+    <div class="mb-3 row">
+      <label for="username" class="form-label col-sm-3">
+        Name
+      </label>
+      <div class="col-sm-8">
+        <input
+          formControlName="username"
+          id="username"
+          type="text"
+          class="form-control sm-8" />
+        <div class="alert alert-danger" role="alert"
+             *ngIf="loginFormControl.username.touched && loginFormControl.username.errors?.['required']">Name Required</div>
+      </div>
+
+    </div>
+
+    <div class="mb-3 row">
+      <label for="password" class="form-label col-sm-3">
+        Year
+      </label>
+      <div class="col-sm-8">
+        <input id="year" type="password" formControlName="password" class="form-control sm-8"/>
+        <div class="alert alert-danger" role="alert"
+             *ngIf="loginFormControl.password.touched && loginFormControl.password.errors?.['required']">Year Required</div>
+
+      </div>
+    </div>
+    <div>
+      <div class="mb-3 row">
+        <label class="form-label col-sm-3">
+
+        </label>
+        <div class="col-sm-8">
+          <button class="btn btn-primary" type="submit">Login</button>
+        </div>
+      </div>
+    </div>
+  </form>
+</div>

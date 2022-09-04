@@ -27,6 +27,8 @@ import { HomePageComponent } from './page/home-page/home-page.component';
 import { MovieListPageComponent } from './page/movie-list-page/movie-list-page.component';
 import { MovieDetailPageComponent } from './page/movie-detail-page/movie-detail-page.component';
 import { NotFoundComponent } from './page/not-found/not-found.component';
+import { MovieDetailsComponent } from './components/movie-details/movie-details.component';
+import { LoginPageComponent } from './page/login-page/login-page.component';
 
 @NgModule({
   declarations: [
@@ -50,7 +52,9 @@ import { NotFoundComponent } from './page/not-found/not-found.component';
     HomePageComponent,
     MovieListPageComponent,
     MovieDetailPageComponent,
-    NotFoundComponent
+    NotFoundComponent,
+    MovieDetailsComponent,
+    LoginPageComponent
   ],
   imports: [
     BrowserModule,

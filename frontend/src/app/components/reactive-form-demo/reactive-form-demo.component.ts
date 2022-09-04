@@ -97,18 +97,20 @@ export class ReactiveFormDemoComponent implements OnInit {
     console.log('Delete movie ',movie);
     this.showDeleteMovieDialog(movie.name).then((result) => {
       if (result.isConfirmed) {
-        this.deleteMovie(index);
+        this.deleteMovie(movie);
       }
     })
   }
 
-  private deleteMovie(index:number) {
-    this.movieService.deleteMovie(index);
-    Swal.fire(
-      'Deleted!',
-      'Your file has been deleted.',
-      'success'
-    )
+  private deleteMovie(movie:Movie) {
+    this.movieService.deleteMovie(movie,()=>{
+      Swal.fire(
+        'Deleted!',
+        'Your file has been deleted.',
+        'success'
+      );
+    });
+
   }
 
   saveOrUpdateMovie()
