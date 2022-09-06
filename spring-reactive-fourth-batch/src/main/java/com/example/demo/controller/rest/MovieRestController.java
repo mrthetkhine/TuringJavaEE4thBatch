@@ -49,6 +49,8 @@ public class MovieRestController {
     public Flux<Movie> getAllMovies() {
         return movieRepository.findAll();
     }
+
+	
 	@GetMapping("/{id}")
     public Mono<ResponseEntity<Movie>> getMovieById(@PathVariable(value = "id") String movieId) {
         return movieRepository.findById(movieId)

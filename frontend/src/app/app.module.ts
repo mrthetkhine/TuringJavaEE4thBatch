@@ -2,7 +2,7 @@ import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { ReactiveFormsModule } from '@angular/forms';
 import { FormsModule } from '@angular/forms';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule,HTTP_INTERCEPTORS } from '@angular/common/http';
 import { ModalModule } from 'ngx-bootstrap/modal';
 
 import { AppRoutingModule } from './app-routing.module';
@@ -29,6 +29,8 @@ import { MovieDetailPageComponent } from './page/movie-detail-page/movie-detail-
 import { NotFoundComponent } from './page/not-found/not-found.component';
 import { MovieDetailsComponent } from './components/movie-details/movie-details.component';
 import { LoginPageComponent } from './page/login-page/login-page.component';
+import {TokenInterceptor} from "./auth/interceptor/TokenInterceptor";
+import { LogoutComponent } from './page/logout/logout.component';
 
 @NgModule({
   declarations: [
@@ -54,7 +56,8 @@ import { LoginPageComponent } from './page/login-page/login-page.component';
     MovieDetailPageComponent,
     NotFoundComponent,
     MovieDetailsComponent,
-    LoginPageComponent
+    LoginPageComponent,
+    LogoutComponent
   ],
   imports: [
     BrowserModule,
@@ -64,7 +67,13 @@ import { LoginPageComponent } from './page/login-page/login-page.component';
     HttpClientModule,
     ModalModule.forRoot()
   ],
-  providers: [],
+  providers: [
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: TokenInterceptor,
+      multi: true
+    }
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

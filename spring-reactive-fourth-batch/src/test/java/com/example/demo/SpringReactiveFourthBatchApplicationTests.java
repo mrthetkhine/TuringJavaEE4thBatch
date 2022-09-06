@@ -10,4 +10,9 @@ class SpringReactiveFourthBatchApplicationTests {
 	void contextLoads() {
 	}
 
+	@Test
+	void simple()
+	{
+		System.out.println("simple run");
+	}
 }

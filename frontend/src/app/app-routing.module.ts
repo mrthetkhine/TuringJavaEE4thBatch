@@ -6,10 +6,12 @@ import {MovieDetailPageComponent} from "./page/movie-detail-page/movie-detail-pa
 import {NotFoundComponent} from "./page/not-found/not-found.component";
 import {LoginPageComponent} from "./page/login-page/login-page.component";
 import {AuthGuard} from "./auth/auth.guard";
+import {LogoutComponent} from "./page/logout/logout.component";
 
 const routes: Routes = [
   { path: 'home',title: 'Hello', component: HomePageComponent },
   { path: 'login',title: 'Login', component: LoginPageComponent },
+  { path: 'logout',title: 'Logout', component: LogoutComponent },
   { path: 'movies',
     component: MovieListPageComponent,
     canActivate:[AuthGuard]
