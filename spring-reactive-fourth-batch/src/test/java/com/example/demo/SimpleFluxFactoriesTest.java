@@ -57,5 +57,29 @@ public class SimpleFluxFactoriesTest {
 		
 	    StepVerifier.create(rangeOfIntegers).expectNextCount(10).verifyComplete();
 	}
+	@Test
+	public void testJust()
+	{
+		Flux<String> letters = Flux.just("A", "B", "C");
+	    StepVerifier.create(letters).expectNext("A", "B","C").verifyComplete();
+	    
+	    Flux<Integer> fromArray = Flux.fromArray(new Integer[] { 1, 2, 3 });
+	    StepVerifier.create(fromArray).expectNext(1, 2, 3).verifyComplete();
+	    
+	    AtomicInteger integer = new AtomicInteger();
+	    Supplier<Integer> supplier = integer::incrementAndGet;
+	    Flux<Integer> integerFlux = Flux.fromStream(Stream.generate(supplier));
+	    StepVerifier.create(integerFlux.take(3)).expectNext(1).expectNext(2).expectNext(3)
+	            .verifyComplete();
+
+	}
+	@Test
+	public void testMono()
+	{
+		long now = System.currentTimeMillis();
+	    Mono<Date> greetingMono = Mono.just(new Date(now));
+	    StepVerifier.create(greetingMono).expectNext(new Date(now)).verifyComplete();
+
+	}
 	
 }
