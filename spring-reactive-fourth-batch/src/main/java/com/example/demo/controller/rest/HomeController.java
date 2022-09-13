@@ -10,6 +10,8 @@ import reactor.core.publisher.Mono;
 
 @RestController
 public class HomeController {
+	
+	/*
 	@ResponseStatus(HttpStatus.OK)
 	@GetMapping(path="/")
 	public Mono<String> index()
@@ -32,4 +34,5 @@ public class HomeController {
 		
 		return Mono.just("It works");
 	}
+	*/
 }
