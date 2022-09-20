@@ -99,4 +99,5 @@ public class HomeController {
 		log.info("Test controller");
 		return "logoutSuccessful";
 	}
+	
 }

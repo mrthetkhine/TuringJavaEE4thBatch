@@ -9,6 +9,7 @@ import javax.annotation.PostConstruct;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -17,10 +18,13 @@ import org.springframework.web.reactive.function.client.WebClient;
 
 import com.example.demo.dto.CountAndString;
 
+import lombok.extern.log4j.Log4j2;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 
 @RestController
+@CrossOrigin
+@Log4j2
 @RequestMapping("consume")
 public class ConsumeRestController {
 	
@@ -139,4 +143,5 @@ public class ConsumeRestController {
 		 return Flux.interval(Duration.ofMillis(300))
 				 	.map(i -> new CountAndString(counter.incrementAndGet()));
 	 }
+	
 }

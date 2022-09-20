@@ -1,12 +1,6 @@
 package com.example.demo.solid;
 
-class Engine
-{
-	public void start()
-	{
-		System.out.println("Engine start");
-	}
-}
+
 class DieselEngine extends Engine
 {
 	public void start()
@@ -24,7 +18,8 @@ class SolarEngine extends Engine
 public class Car {
 	Engine engine;
 	
-	Car(Engine engine)
+	
+	public Car(Engine engine)
 	{
 		this.engine = engine;
 	}
@@ -32,5 +27,9 @@ public class Car {
 	{
 		System.out.println("Car start");
 		this.engine.start();
+	}
+	public int getMile()
+	{
+		return this.engine.getMile();
 	}
 }

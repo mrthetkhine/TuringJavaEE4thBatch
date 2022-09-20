@@ -5,6 +5,7 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.web.reactive.function.server.RouterFunction;
 import org.springframework.web.reactive.function.server.RouterFunctions;
 import org.springframework.web.reactive.function.server.ServerResponse;
+import org.springframework.web.reactive.socket.server.support.WebSocketHandlerAdapter;
 
 import static org.springframework.web.reactive.function.server.RouterFunctions.route;
 import static org.springframework.web.reactive.function.server.ServerResponse.ok;
@@ -14,8 +15,14 @@ public class SimpleFunctionalEndpointConfiguration {
 
 
    
-
+	/*
+	@Bean
+    WebSocketHandlerAdapter webSocketHandlerAdapter() {
+        return new WebSocketHandlerAdapter();
+	}	
+	*/
    
+	/*
     @Bean
     RouterFunction<ServerResponse> simple(GreetingsHandlerFunction handler)
     {
@@ -35,4 +42,5 @@ public class SimpleFunctionalEndpointConfiguration {
         return route().GET("/hello", greetingHandler)
                 .build();
     }
+    */
 }

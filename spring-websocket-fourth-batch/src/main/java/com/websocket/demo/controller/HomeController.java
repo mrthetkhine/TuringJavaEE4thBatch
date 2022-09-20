@@ -1,4 +1,4 @@
-package com.example.demo.controller.rest;
+package com.websocket.demo.controller;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
@@ -15,30 +15,7 @@ import reactor.core.publisher.Mono;
 @Controller
 public class HomeController {
 	
-	/*
-	@ResponseStatus(HttpStatus.OK)
-	@GetMapping(path="/")
-	public Mono<String> index()
-	{
-		
-		Flux<String> x = Flux.just("x1","x2","x3");
-		Flux<String> y = Flux.just("y1","y2");
-		
-		Flux<String> another = Flux.concat(x,y);
-		another.subscribe(
-				str->System.out.println("Result "+str));
-		another.subscribe(
-				str->System.out.println("Result2 "+str));
-		
-		Flux.merge(x,y).subscribe(
-				str->System.out.println("Merge "+str));
-		Flux.zip(x, y).subscribe(
-				str->System.out.println("Zip "+str));
-		
-		
-		return Mono.just("It works");
-	}
-	*/
+	
 	 @RequestMapping("/websocket")
 	 public String webSocket()
 	 {
