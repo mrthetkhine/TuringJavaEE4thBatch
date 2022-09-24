@@ -28,13 +28,14 @@ import com.example.demo.model.MovieDetail;
 import com.example.demo.repository.MovieDetailRepository;
 import com.example.demo.repository.MovieRepository;
 
-
+import lombok.extern.log4j.Log4j2;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 
 @RestController
 @CrossOrigin
 @RequestMapping("api/movies")
+@Log4j2
 public class MovieRestController {
 	@Autowired
 	MovieRepository movieRepository;
@@ -42,11 +43,14 @@ public class MovieRestController {
 	@Autowired
 	MovieDetailRepository movieDetailRepository;
 	
+	/*
 	@Autowired
 	private MongoTemplate mongoTemplate;
+	*/
 	
 	@GetMapping
     public Flux<Movie> getAllMovies() {
+		log.info("Controller get all movies");
         return movieRepository.findAll();
     }
 

@@ -18,8 +18,8 @@ import com.turing.javaee.controller.HelloController;
 import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
-//@Component
-//@Aspect
+@Component
+@Aspect
 public class LoggingAspect {
 	
 	@Pointcut("execution(* com.turing.javaee.controller.*.*(..))")
