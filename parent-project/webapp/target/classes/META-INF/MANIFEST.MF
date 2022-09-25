@@ -1,0 +1,9 @@
+Manifest-Version: 1.0
+Built-By: macbook
+Build-Jdk: 17.0.3
+Implementation-Title: webapp
+Implementation-Version: 1.0-SNAPSHOT
+Implementation-Vendor-Id: com.turing.webapp
+Implementation-URL: http://www.example.com
+Created-By: Maven Integration for Eclipse
+

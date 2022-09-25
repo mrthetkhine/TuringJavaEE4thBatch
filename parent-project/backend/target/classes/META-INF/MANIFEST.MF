@@ -1,0 +1,9 @@
+Manifest-Version: 1.0
+Built-By: macbook
+Build-Jdk: 17.0.3
+Implementation-Title: backend
+Implementation-Version: 1.0-SNAPSHOT
+Implementation-Vendor-Id: com.turing.backend
+Implementation-URL: http://www.example.com
+Created-By: Maven Integration for Eclipse
+

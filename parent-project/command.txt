@@ -1,0 +1,7 @@
+mvn archetype:generate -DgroupId=com.turing.javaee4th.multi -DartifactId=parent-project
+cd parnet-project
+mvn archetype:generate -DgroupId=com.turing.webapp -DartifactId=webapp
+mvn archetype:generate -DgroupId=com.turing.backend -DartifactId=backend
+
+cd webapp/src/main
+ng new web
